@@ -1,21 +1,26 @@
 /**
  * Model for Questionnaire server side schema
  */
-import mongoose from 'mongoose';
-import { TagSchema } from './tag.model';
-import { GroupSchema } from './group.model';
-
-const Schema = mongoose.Schema;
+import mongoose, { Schema } from 'mongoose';
 
 export const QuestionnaireSchema = new Schema({
     title: {
         type: String,
         required: 'Enter Question title'
     },
+    type: {
+        type: String,
+        required: 'QA type question or Article type'
+    },
+    hasRead : {
+        type: Boolean,
+        required: 'Checked against user...default to false',
+        default: false
+    },
     question: {
         type: String,
         required: 'Enter the Question'
-    },
+    },    
     answer: {
         type: String,
         required: 'Enter the Answer'
@@ -23,9 +28,15 @@ export const QuestionnaireSchema = new Schema({
     date: {
         type: Number,
         required: 'Provide Date of creation'
-    },
-    tags: [TagSchema],
-    group: GroupSchema
+    },    
+    tags: [{
+        type: Schema.Types.ObjectId,
+        ref: 'tags'
+    }],
+    groups: [{
+        type: Schema.Types.ObjectId,
+        ref: 'groups'
+    }]
 });
 
 export const QuestionnaireModel = mongoose.model('questions', QuestionnaireSchema);
