@@ -17,7 +17,7 @@ export const setupDBConnection = (env)=>{
     };
     mongoose.connect(url, {
         useNewUrlParser: true,
-        useFindAndModify: true,
+        useFindAndModify: false,
         // useMongoClient: true
     });
 };

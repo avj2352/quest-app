@@ -6,9 +6,10 @@ import { InventoryModel } from './../models/inventory.model';
 
 export class InventoryController {
     addNewRecord (req, res) {
+        let newRecord;
         try {
             // Query Question
-            const newRecord = new InventoryModel({
+            newRecord = new InventoryModel({
                 user: req.params.userId,
                 question: req.params.questionId
             });

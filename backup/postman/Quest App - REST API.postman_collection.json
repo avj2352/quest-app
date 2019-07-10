@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "9ce3bdd2-f564-4434-adb2-52d10a4a2875",
+		"name": "Quest App - REST API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tag - Get All Tags",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/tag",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tag"
+					]
+				},
+				"description": "Service to get all tags stored in db"
+			},
+			"response": []
+		},
+		{
+			"name": "Tag - Create Record",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"amazons\",\n\t\"description\": \"interview questions asked in amazon\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/tag",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tag"
+					]
+				},
+				"description": "Create a new Tag entry"
+			},
+			"response": []
+		},
+		{
+			"name": "Tag - Retrieve by Tag name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/tag/google",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tag",
+						"google"
+					]
+				},
+				"description": "Get a particular record by tag name"
+			},
+			"response": []
+		},
+		{
+			"name": "Tag - Update record",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"amazon\",\n\t\"description\": \"interview questions asked in amazon company\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/tag/amazons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tag",
+						"amazons"
+					]
+				},
+				"description": "Update particular record by its tag name"
+			},
+			"response": []
+		},
+		{
+			"name": "Group - Get all Groups",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/group",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"group"
+					]
+				},
+				"description": "GET Request to retrieve all stored groups"
+			},
+			"response": []
+		},
+		{
+			"name": "Group - add new Group",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\":\"AngularJS\",\n\t\"slug\":\"ng\",\n\t\"description\": \"angular js 1.x related questions\",\n\t\"premium\": false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/group",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"group"
+					]
+				},
+				"description": "POST request to add new Group record"
+			},
+			"response": []
+		},
+		{
+			"name": "Group - Get group by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/group/5d24bd4e2c39b12ce8df1d14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"group",
+						"5d24bd4e2c39b12ce8df1d14"
+					]
+				},
+				"description": "Retrieve a particular record by id"
+			},
+			"response": []
+		},
+		{
+			"name": "Group - Update group by id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\":\"Algorithms\",\n\t\"slug\":\"algos\",\n\t\"description\": \"collection of algorithms related interview questions\",\n\t\"premium\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/group/5d24bd4e2c39b12ce8df1d14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"group",
+						"5d24bd4e2c39b12ce8df1d14"
+					]
+				},
+				"description": "Update a particular record by id"
+			},
+			"response": []
+		},
+		{
+			"name": "Group - Delete group by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/group/5d256b3b468ed73010084a12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"group",
+						"5d256b3b468ed73010084a12"
+					]
+				},
+				"description": "Delete a particular record by id"
+			},
+			"response": []
+		}
+	]
+}

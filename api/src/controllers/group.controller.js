@@ -32,14 +32,14 @@ export class GroupController {
     updateGroupById (req, res) {
         GroupModel.findOneAndUpdate({_id: req.params.groupId}, req.body, { new: true }, (err, data)=>{
             if (err) res.send(err);
-            else res.json(contact); // Get JSON format of contact
+            else res.json(data); // Get JSON format of contact
         });
     }
 
     deleteGroupById (req, res) {
-        GroupModel.deleteOne({_id: req.params.id}, (err)=>{
+        GroupModel.deleteOne({_id: req.params.groupId}, (err)=>{
             if (err) res.send(err);
-            else res.json({message: `Successfully deleted group id: ${req.params.id}`});
+            else res.json({message: `Successfully deleted group id: ${req.params.groupId}`});
         });
     }
 }

@@ -1,0 +1,581 @@
+{
+	"info": {
+		"_postman_id": "9ce3bdd2-f564-4434-adb2-52d10a4a2875",
+		"name": "Quest App - REST API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tag - Get All Tags",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/tag",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tag"
+					]
+				},
+				"description": "Service to get all tags stored in db"
+			},
+			"response": []
+		},
+		{
+			"name": "Tag - Create Record",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"2019\",\n\t\"description\": \"interview questions asked in 2019\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/tag",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tag"
+					]
+				},
+				"description": "Create a new Tag entry"
+			},
+			"response": []
+		},
+		{
+			"name": "Tag - Retrieve by Tag name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/tagName/google",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tagName",
+						"google"
+					]
+				},
+				"description": "Get a particular record by tag name"
+			},
+			"response": []
+		},
+		{
+			"name": "Tag - Update record by name",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"amazon\",\n\t\"description\": \"interview questions asked in amazon company\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/tagName/amazons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tagName",
+						"amazons"
+					]
+				},
+				"description": "Update particular record by its tag name"
+			},
+			"response": []
+		},
+		{
+			"name": "Group - Get all Groups",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/group",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"group"
+					]
+				},
+				"description": "GET Request to retrieve all stored groups"
+			},
+			"response": []
+		},
+		{
+			"name": "Group - add new Group",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\":\"AngularJS\",\n\t\"slug\":\"ng\",\n\t\"description\": \"angular js 1.x related questions\",\n\t\"premium\": false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/group",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"group"
+					]
+				},
+				"description": "POST request to add new Group record"
+			},
+			"response": []
+		},
+		{
+			"name": "Group - Get group by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/group/5d24bd4e2c39b12ce8df1d14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"group",
+						"5d24bd4e2c39b12ce8df1d14"
+					]
+				},
+				"description": "Retrieve a particular record by id"
+			},
+			"response": []
+		},
+		{
+			"name": "Group - Update group by id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\":\"Algorithms\",\n\t\"slug\":\"algos\",\n\t\"description\": \"collection of algorithms related interview questions\",\n\t\"premium\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/group/5d24bd4e2c39b12ce8df1d14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"group",
+						"5d24bd4e2c39b12ce8df1d14"
+					]
+				},
+				"description": "Update a particular record by id"
+			},
+			"response": []
+		},
+		{
+			"name": "Group - Delete group by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/group/5d256b3b468ed73010084a12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"group",
+						"5d256b3b468ed73010084a12"
+					]
+				},
+				"description": "Delete a particular record by id"
+			},
+			"response": []
+		},
+		{
+			"name": "Tag - Delete by Tag name",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/tagName/2019",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tagName",
+						"2019"
+					]
+				},
+				"description": "Delete record by tag name"
+			},
+			"response": []
+		},
+		{
+			"name": "Tag - Delete by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/tag/5d22c436df095525f02c87f3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tag",
+						"5d22c436df095525f02c87f3"
+					]
+				},
+				"description": "Delete record by tag id"
+			},
+			"response": []
+		},
+		{
+			"name": "QUESTION - Create record",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Simple Article\",\r\n    \"type\": \"article\",\r\n    \"question\": \"#This is a test Note\",\r\n    \"answer\": \"\",    \r\n    \"tags\": [\"5d259c74a1b4a103b4608a12\"],\r\n    \"groups\": [\"5d24be4921c73a2b0ccece33\"]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/question",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"question"
+					]
+				},
+				"description": "POST api to create a new record"
+			},
+			"response": []
+		},
+		{
+			"name": "QUESTION - Delete record",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Simple Question\",\r\n    \"type\": \"qa\",\r\n    \"question\": \"#this is a sample question markdown\",\r\n    \"answer\": \"Simple answer\",    \r\n    \"tags\": [\"5d259c74a1b4a103b4608a12\"],\r\n    \"groups\": [\"5d24be4921c73a2b0ccece33\"]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/question/5d25d226ec477f32102ceade",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"question",
+						"5d25d226ec477f32102ceade"
+					]
+				},
+				"description": "Delete an existing record"
+			},
+			"response": []
+		},
+		{
+			"name": "QUESTION - Get all records",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/question/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"question",
+						""
+					]
+				},
+				"description": "Get all records from Questionnaire document"
+			},
+			"response": []
+		},
+		{
+			"name": "QUESTION - Update record",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Simple Article 2\",\r\n    \"type\": \"article\",\r\n    \"question\": \"# Page 01\",\r\n    \"answer\": \"# Page 02\",\r\n    \"tags\": [\"5d259c74a1b4a103b4608a12\"],\r\n    \"groups\": [\"5d24be4921c73a2b0ccece33\"]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/question/5d25e3d2e430f64de0a8cf87",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"question",
+						"5d25e3d2e430f64de0a8cf87"
+					]
+				},
+				"description": "Update record by id"
+			},
+			"response": []
+		},
+		{
+			"name": "QUESTION - Get Question by ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/question/5d25d326bdcd80407839f5ec",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"question",
+						"5d25d326bdcd80407839f5ec"
+					]
+				},
+				"description": "Get a record by id"
+			},
+			"response": []
+		},
+		{
+			"name": "USER - Get all Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user"
+					]
+				},
+				"description": "Query to get all users"
+			},
+			"response": []
+		},
+		{
+			"name": "USER - Create new user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Pramod Jingade\",\n\t\"password\": \"test123\",\n\t\"email\": \"pramod.jingade@gmail.com\",\n\t\"premium\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user"
+					]
+				},
+				"description": "Create a new record of user"
+			},
+			"response": []
+		},
+		{
+			"name": "USER - Get specific User by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/user/5d25fcb95b2ef420883559b9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"5d25fcb95b2ef420883559b9"
+					]
+				},
+				"description": "Get a record by user ID"
+			},
+			"response": []
+		},
+		{
+			"name": "USER - Update User by ID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Pramod Jingade\",\n\t\"password\": \"test123\",\n\t\"email\": \"pramod.jingade@gmail.com\",\n\t\"premium\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/user/5d25fcb95b2ef420883559b9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"5d25fcb95b2ef420883559b9"
+					]
+				},
+				"description": "Update User record by ID"
+			},
+			"response": []
+		},
+		{
+			"name": "USER - Delete User by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/user/5d25fcb95b2ef420883559b9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"5d25fcb95b2ef420883559b9"
+					]
+				},
+				"description": "Delete a record by ID"
+			},
+			"response": []
+		}
+	]
+}

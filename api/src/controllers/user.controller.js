@@ -6,13 +6,13 @@ import { UserModel } from './../models/user.model';
 export class UserController {
     // Create - new User record
     addNewUser (req, res) {
-       try {
+        let aUser;
+        try {
         // Query Question
-        const aUser = new UserModel({
-            name: req.body.title,
-            password: req.body.type,
-            question: req.body.question,
-            email: req.body.answer,
+        aUser = new UserModel({
+            name: req.body.name,
+            password: req.body.password,            
+            email: req.body.email,
             premium: req.body.premium
         });
        } catch (err) {
@@ -43,13 +43,12 @@ export class UserController {
     }
 
     // Update - User by UserId
-    updateUserById (req, res) {
+    updateUserById (req, res) {    
         try {            
             const aUser = UserModel.findByIdAndUpdate({ _id: req.params.userId },{
-                name: req.body.title,
-                password: req.body.type,
-                question: req.body.question,
-                email: req.body.answer,
+                name: req.body.name,
+                password: req.body.password,                
+                email: req.body.email,
                 premium: req.body.premium               
             }, {new: true}, (err, data)=>{
                 if (err) res.send(err);
