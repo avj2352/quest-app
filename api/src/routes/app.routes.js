@@ -1,17 +1,20 @@
 /**
  * Main Webservice Routes application
 */
+import { handleOAuth } from './../handlers/oauth';
 import { TagController } from './../controllers/tag.controller';
 import { GroupController } from './../controllers/group.controller';
 import { UserController } from './../controllers/user.controller';
 import { QuestionsController } from './../controllers/questionnaire.controller';
 import { InventoryController } from './../controllers/inventory.controller';
+import { BasicAuthentication } from '../handlers/basic.auth';
 
 const tag = new TagController();
 const group = new GroupController();
 const user = new UserController();
 const question = new QuestionsController();
 const map = new InventoryController();
+const auth = new BasicAuthentication();
 
 const routes = (app) => {
 
@@ -50,6 +53,10 @@ const routes = (app) => {
     .put(user.updateUserById)
     .delete(user.deleteUserById);
 
+    // Get User by Email
+    app.route('/user/email/:emailId')
+    .get(auth.getUserDetailsByEmail);
+
     // QUESTIONNAIRE ================
     app.route('/question')
     .get(question.getAllQuestions)
@@ -64,6 +71,9 @@ const routes = (app) => {
     app.get('/read/:userId/:questionId', map.addNewRecord);
     app.get('/unread/:userId/:questionId', map.deleteRecord);
 
+    // Simple Authentication =========
+    app.route('/login')  
+    .post(auth.authenticateUser);
 };
 
 
