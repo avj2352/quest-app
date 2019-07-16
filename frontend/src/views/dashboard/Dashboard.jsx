@@ -1,10 +1,11 @@
 import React from 'react';
-
+//Components
+import Sidebar from './../../components/sidebar/Sidebar.jsx';
 
 const Dashboard = (props) => {
     return (
         <div>
-            Hello World!
+            <Sidebar/>
         </div>
     )
 };

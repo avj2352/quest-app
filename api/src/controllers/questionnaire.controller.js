@@ -13,43 +13,6 @@ export class QuestionsController {
         this.tagModelList = [];        
     }
 
-    // populateGroupModel(groupList) {
-    //     console.log('Populating group');        
-    //     groupList.map(el => {
-    //         this.groupModelList.push(mongoose.Types.ObjectId(el));
-    //     });
-    //     try {
-    //         GroupModel.find({
-    //             '_id': {$in: this.groupModelList}
-    //         }, (err, data)=>{
-    //             if (err) {
-    //                 console.log(err);
-    //                 return null;
-    //             }                    
-    //             else return data; 
-    //         })
-    //     } catch (err) {
-    //         return null;
-    //     }
-    // }
-
-    // populateTagModel(tagList) {
-    //     console.log('Populating tag');        
-    //     tagList.map(el => {
-    //         this.tagModelList.push(mongoose.Types.ObjectId(el));
-    //     });
-    //     try {
-    //         TagModel.find({
-    //             '_id': {$in: this.tagModelList}
-    //         }, (err, data)=>{
-    //             if (err) return null;
-    //             else return data;
-    //         });
-    //     } catch(err) {
-    //         console.log('Error retrieving tag records', err);
-    //         return null;
-    //     }
-    // }
 
     // Create - new question record
     addNewQuestion (req, res) {
@@ -86,6 +49,17 @@ export class QuestionsController {
     // Retrieve - question by Id
     getQuestionById (req, res) {
         QuestionnaireModel.findOne({_id: req.params.questionId})
+        .populate('tags')
+        .populate('groups')
+        .exec((err, data)=>{
+            if (err) res.send(err);
+            else res.json(data);
+        });
+    }
+
+    // Retrieve - questions by groupId
+    getQuestionByGroupId (req, res) {
+        QuestionnaireModel.findOne({groups: req.params.groupId})
         .populate('tags')
         .populate('groups')
         .exec((err, data)=>{

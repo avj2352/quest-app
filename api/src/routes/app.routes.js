@@ -67,6 +67,10 @@ const routes = (app) => {
     .put(question.updateQuestionById)
     .delete(question.deleteQuestionById);
 
+    // QUESTIONNAIRE BY GROUPID ========
+    app.route('/question/groups/:groupId')
+    .get(question.getQuestionByGroupId);
+
     // INVENTORY ===================
     app.get('/read/:userId/:questionId', map.addNewRecord);
     app.get('/unread/:userId/:questionId', map.deleteRecord);
