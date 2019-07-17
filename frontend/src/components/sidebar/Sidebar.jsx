@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './sidebar.css';
-import { FaAlignJustify } from 'react-icons/fa';
+import { FaAlignJustify, FaBattleNet, FaChrome, FaDeskpro } from 'react-icons/fa';
+import { getAllQuestions } from './../../common/async-requests';
 
 const Sidebar = (props) => {
+
+
+    // componentDidMount
+    useEffect(()=>{
+        getAllQuestions().then(data => console.log(data));
+    },[]);
+
     return (
-        <div className="s-layout">        
+    <div className="s-layout">        
         <div className="s-layout__sidebar">
         <a className="s-sidebar__trigger" href="#0">
             <FaAlignJustify className="icon--menu-sandwich"/>
@@ -14,26 +22,26 @@ const Sidebar = (props) => {
             <ul>
                 <li>
                 <a className="s-sidebar__nav-link" href="#0">
-                    <i className="fa fa-home"></i><em>Home</em>
+                    <FaBattleNet className="icon"/>
+                    <span>Home</span>
                 </a>
                 </li>
                 <li>
                 <a className="s-sidebar__nav-link" href="#0">
-                    <i className="fa fa-user"></i><em>My Profile</em>
+                    <FaChrome className="icon"/>
+                    <span>Home</span>
                 </a>
                 </li>
                 <li>
                 <a className="s-sidebar__nav-link" href="#0">
-                    <i className="fa fa-camera"></i><em>Camera</em>
+                    <FaDeskpro className="icon"/>
+                    <span>Home</span>
                 </a>
                 </li>
-            </ul>
+            </ul>            
         </nav>
-        </div>        
-        <main className="s-layout__content">
-        <h1>Full View, Please!</h1>
-        </main>
-</div>
+        </div>                
+    </div>
     );
 };
 

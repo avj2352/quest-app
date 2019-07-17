@@ -3,7 +3,7 @@
   box-sizing: border-box; }
 
 body {
-  font-family: sans-serif;
+  font-family: "Segoe UI" sans-serif;
   font-size: 1em;
   color: #333; }
 
@@ -21,7 +21,7 @@ a {
 .s-layout {
   display: flex;
   width: 100%;
-  min-height: 100vh; }
+  min-height: 90vh; }
 
 .s-layout__content {
   display: flex;
@@ -52,8 +52,16 @@ a {
   transition: all .3s ease-in;
   width: 15em;
   height: 100%;
-  background: #243e56;
-  color: rgba(255, 255, 255, 0.7); }
+  background: #4582EC;
+  color: rgba(255, 255, 255, 0.9);
+  background: #4582ec;
+  background: -moz-linear-gradient(top, #4582ec 0%, #295ab0 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, #4582ec), color-stop(100%, #295ab0));
+  background: -webkit-linear-gradient(top, #4582ec 0%, #295ab0 100%);
+  background: -o-linear-gradient(top, #4582ec 0%, #295ab0 100%);
+  background: -ms-linear-gradient(top, #4582ec 0%, #295ab0 100%);
+  background: linear-gradient(to bottom, #4582ec 0%, #295ab0 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4582ec', endColorstr='#295ab0', GradientType=0 ); }
 
 .s-sidebar__nav:hover,
 .s-sidebar__nav:focus,
@@ -72,18 +80,31 @@ a {
 .s-sidebar__nav ul li {
   width: 100%; }
 
-.s-sidebar__nav-link {
+a.s-sidebar__nav-link {
+  display: flex;
+  text-transform: uppercase;
   position: relative;
-  display: inline-block;
   width: 100%;
-  height: 4em; }
+  height: 4em;
+  justify-content: flex-start;
+  align-items: center;
+  text-decoration: none; }
+  a.s-sidebar__nav-link:hover {
+    color: white;
+    font-weight: bold; }
+  a.s-sidebar__nav-link:visited {
+    color: white; }
+  a.s-sidebar__nav-link .icon {
+    font-size: 1.5rem;
+    position: relative;
+    margin: 0 20px 0; }
+  a.s-sidebar__nav-link em {
+    position: absolute;
+    top: 50%;
+    left: 4em;
+    transform: translateY(-50%); }
 
-.s-sidebar__nav-link em {
-  position: absolute;
-  top: 50%;
-  left: 4em;
-  transform: translateY(-50%); }
-
+.s-sidebar__nav-link
 .s-sidebar__nav-link:hover {
   background: #4d6276; }
 
@@ -110,9 +131,11 @@ a {
   left: 22px; }
 
 /* Mobile First */
-@media (min-width: 42em) {
-  .icon--menu-sandwich {
-    top: 2.5vh; }
+@media (min-width: 12em) {
+  .icon {
+    color: white; }
+    .icon--menu-sandwich {
+      top: 3vh; }
   .s-layout__content {
     margin-left: 4em; }
   /* Sidebar */

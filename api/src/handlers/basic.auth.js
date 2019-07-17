@@ -14,6 +14,7 @@ export class BasicAuthentication {
         try{    
             const email = req.body.email;
             const password = req.body.password;
+            console.log('email and password is: ', email, password);
             this.user.getUserByEmail(email)
             .then(user => {
                 if(bcrypt.compareSync(password, user.password)) {
@@ -21,6 +22,9 @@ export class BasicAuthentication {
                 } else {
                     res.sendStatus(400);
                 }
+            })
+            .catch(err => {
+                res.sendStatus(400);
             })
         } catch (err) {
             res.send(err);

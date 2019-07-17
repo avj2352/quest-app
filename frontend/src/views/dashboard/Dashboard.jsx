@@ -1,13 +1,14 @@
-import React from 'react';
-//Components
-import Sidebar from './../../components/sidebar/Sidebar.jsx';
+import React, {useEffect} from 'react';
 
 const Dashboard = (props) => {
+    // componentDidMount
+    useEffect(()=>{
+
+    },[]);
+
     return (
-        <div>
-            <Sidebar/>
-        </div>
-    )
+        <div>Dashboard View</div>
+    );
 };
 
 export default Dashboard;
