@@ -14,7 +14,7 @@ export class QueriesController {
 
     filterGroupsByUserPremium (req, res) {
         const email = req.header('email');
-        if(email) {
+        if(email && email !=='') {
             this.user.fetchUserByEmail(email)
             .then(data => {
                 if(!data.premium) {
@@ -25,7 +25,7 @@ export class QueriesController {
             });
         }
         else {
-            this.group.getAllGroups(req, res);
+            this.group.filterGroupsWithoutPremium(req, res);
         }
     }
 }
