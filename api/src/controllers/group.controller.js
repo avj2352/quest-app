@@ -12,6 +12,13 @@ export class GroupController {
         });
     }
 
+    filterGroupsWithoutPremium (req, res) {
+        GroupModel.find({premium: false}, (err, data)=>{
+            if (err) res.send(err);
+            else res.json(data);
+        });
+    }
+
     // CREATE - group record
     addNewGroup (req, res) {
         let newGroupRecord = new GroupModel(req.body);

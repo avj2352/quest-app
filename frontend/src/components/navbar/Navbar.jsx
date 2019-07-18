@@ -1,3 +1,6 @@
+/**
+ * Navbar Component - Quest App
+ */
 import React from 'react';
 import './navbar.css';
 import DropDownButton from '../drop-down-button/DropDownButton.jsx';

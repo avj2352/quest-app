@@ -1,3 +1,6 @@
+/**
+ * Login / Dropdown button under Navbar - Quest App
+ */
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from './../../common/AppContext.jsx';
 import './drop-down.css';

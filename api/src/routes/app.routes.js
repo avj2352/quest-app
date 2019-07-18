@@ -8,6 +8,7 @@ import { UserController } from './../controllers/user.controller';
 import { QuestionsController } from './../controllers/questionnaire.controller';
 import { InventoryController } from './../controllers/inventory.controller';
 import { BasicAuthentication } from '../handlers/basic.auth';
+import { QueriesController } from './../handlers/queries';
 
 const tag = new TagController();
 const group = new GroupController();
@@ -15,6 +16,7 @@ const user = new UserController();
 const question = new QuestionsController();
 const map = new InventoryController();
 const auth = new BasicAuthentication();
+const queries = new QueriesController();
 
 const routes = (app) => {
 
@@ -37,6 +39,10 @@ const routes = (app) => {
     app.route('/group')
     .get(group.getAllGroups)
     .post(group.addNewGroup);
+
+    // FILTERED GROUPS =============
+    app.route('/filtered/group')
+    .get(queries.filterGroupsByUserPremium);
     
     app.route('/group/:groupId')
     .get(group.getGroupById)
