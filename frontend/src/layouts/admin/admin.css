@@ -1,0 +1,36 @@
+.dashboard-view {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0; }
+
+@media (min-width: 12em) {
+  .dashboard-view {
+    margin: 5px 0 0 4rem;
+    width: 80%;
+    height: 88vh; } }
+
+@media (min-width: 63em) {
+  .dashboard-view {
+    margin: 5px 0 0 4rem;
+    width: 90%;
+    height: 91vh; } }
+
+@media (min-width: 68em) {
+  .dashboard-view {
+    margin: 8px 0px 2px 16rem;
+    width: 70%;
+    height: 91vh; } }
+
+@media (min-width: 70em) {
+  .dashboard-view {
+    margin: 8px 0px 2px 16rem;
+    width: 73%;
+    height: 91vh; } }
+
+@media (min-width: 80em) {
+  .dashboard-view {
+    margin: 8px 0px 2px 16rem;
+    width: 80%;
+    height: 91vh; } }

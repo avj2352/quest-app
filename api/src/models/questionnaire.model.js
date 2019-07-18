@@ -11,12 +11,7 @@ export const QuestionnaireSchema = new Schema({
     type: {
         type: String,
         required: 'QA type question or Article type'
-    },
-    hasRead : {
-        type: Boolean,
-        required: 'Checked against user...default to false',
-        default: false
-    },
+    },    
     question: {
         type: String,
         required: 'Enter the Question'

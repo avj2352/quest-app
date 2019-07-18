@@ -5,12 +5,13 @@ import { AppProvider } from './common/AppContext.jsx';
 import * as serviceWorker from './serviceWorker';
 import AdminLayout from './layouts/admin/Admin.jsx';
 import Login from './views/auth/Login.jsx';
+import App from './App';
 
 ReactDOM.render(
         <AppProvider>
             <Router>
                 <Switch>
-                    <Route path="/dasbhoard" render={props => <AdminLayout {...props} />} />
+                    <Route path="/dasbhoard" render={props => <App {...props} />} />
                     <Route path="/login" component = {Login} />
                     <Redirect from="/" to="/dasbhoard" />
                 </Switch>

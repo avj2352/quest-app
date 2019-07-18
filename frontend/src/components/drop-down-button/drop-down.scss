@@ -65,6 +65,7 @@
   
   .dd-input:checked + .dd-menu {
     display: block;
+    z-index: 90;
   } 
   
   .dd-menu li {
