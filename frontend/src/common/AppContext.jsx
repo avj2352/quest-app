@@ -8,21 +8,25 @@ export const AppContext = React.createContext();
 export class AppProvider extends Component {
     constructor() {
         super();
-        this.state = {
-            topics:[],
-            inputList:[],
-            filterText:'',
-            qLength:0,
-            rLength:0,
+        this.state = {            
             version:'3.0.1',
-            title:'QUEST APP',
-            user:'',            
-            slug:'',
-            date:0,                
-            setSlug:(value)=>{
-                console.log('Setting slug: ', value);
-                this.setState({slug: value});
+            title:'QUEST APP',                            
+            addLocalStorageItem:(name, value) => {
+                localStorage.setItem(`quest-${name}`, value);
             }, 
+            removeLocalStorageItem:(name) => {
+                localStorage.removeItem(`quest-${name}`);
+            },
+            getLocalStorageItem:(name) => {
+                localStorage.getItem(`quest-${name}`);
+            },
+            addLocalStorageJSON: (name, data) => {
+                localStorage.setItem(`quest-${name}`, JSON.stringify(data));
+            },
+            getLocalStorageJSON: (name) => {
+                const data = localStorage.getItem(`quest-${name}`);
+                return JSON.parse(data);
+            }
         };
     }
 

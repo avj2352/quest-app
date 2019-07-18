@@ -74,6 +74,19 @@ export class UserController {
         });
         return promise;
     }
+
+    // Fetch userDetails
+    fetchUserByEmail (email) {
+        const promise = new Promise((resolve, reject)=>{
+            UserModel.findOne({email: email})
+            .select('+password')
+            .exec((err, data)=>{
+                if (err) reject(err);
+                else resolve(data);
+            });
+        });
+        return promise;
+    }
     
     // Update - User by UserId
     updateUserById (req, res) {    
@@ -81,7 +94,7 @@ export class UserController {
             const aUser = UserModel.findByIdAndUpdate({ _id: req.params.userId },{
                 name: req.body.name,
                 provider: req.body.provider,
-                password: req.body.password,
+                password: bcrypt.hashSync(req.body.password, saltRounds),
                 email: req.body.email,
                 premium: req.body.premium
             }, {new: true}, (err, data)=>{

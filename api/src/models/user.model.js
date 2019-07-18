@@ -10,7 +10,8 @@ export const UserSchema = new Schema({
     },
     password: {
         type: String,
-        required: 'Enter password'
+        required: 'Enter password',
+        select: false
     },
     provider: {
         type: String,

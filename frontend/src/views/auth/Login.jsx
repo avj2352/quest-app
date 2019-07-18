@@ -1,15 +1,23 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Loader from './../../components/loader/Loader.jsx';
 import './login.css';
 import imgLogo from '../../assets/img/logo-small.png';
-import { authenticationUser } from './../../common/async-requests';
+import { authenticationUser, getUserByEmail } from './../../common/async-requests';
+import { AppContext } from '../../common/AppContext.jsx';
 
 const Login = props => {
+    const appContext = useContext(AppContext);
+
     const [isLoading, setIsLoading] = useState(false);
     const [errMsg, setErrMsg] = useState('');
     const [username, setUsername]   = useState('');
     const [password, setPassword] = useState('');
 
+    //componentDidMount
+    useEffect(()=>{
+        appContext.removeLocalStorageItem('user-details');
+    },[]);
+    
     const onChange = async (field, evt) => {
         evt.preventDefault();        
         switch(field) {
@@ -23,6 +31,15 @@ const Login = props => {
         };
     };
 
+    const storeCredentials = (email) => {
+        getUserByEmail(email)
+        .then(res => {
+            appContext.addLocalStorageJSON('user-details', res.data);
+            setIsLoading(false);
+            window.location.href = '#/dashboard';
+        });        
+    }
+
     const authenticate = async (evt) => {
         evt.preventDefault();
         // console.log('Credentials: ', username, password);
@@ -30,9 +47,7 @@ const Login = props => {
             setIsLoading(true);
             authenticationUser({email: username, password: password})
             .then(data => {
-                console.log('Response is: ', data);
-                setIsLoading(false);
-                window.location.href = '#/dashboard';
+                storeCredentials(username);
             })
             .catch(err => {
                 console.log('Error with authentication', err);
