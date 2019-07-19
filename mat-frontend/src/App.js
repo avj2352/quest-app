@@ -3,7 +3,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { AppContext } from './common/AppContext';
-import Login from './views/Login.jsx';
+import Login from './views/login/Login.jsx';
 import AdminLayout from './layouts/admin/AdminLayout.jsx';
 import './App.css';
 

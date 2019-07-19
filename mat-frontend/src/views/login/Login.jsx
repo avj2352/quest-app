@@ -11,11 +11,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 //Context
-import { AppContext } from './../common/AppContext.jsx';
-import { authenticationUser, getUserByEmail } from './../common/async-requests';
+import { AppContext } from '../../common/AppContext.jsx';
+import { authenticationUser, getUserByEmail } from '../../common/async-requests';
 //CSS in JS
 import { useStyles } from './login-style';
-import logo from './../assets/apple-icon.png';
+import logo from './../../assets/apple-icon.png';
 
 
 const Login = ()=>{
@@ -71,6 +71,8 @@ const Login = ()=>{
 
     //componentDidMount
     useEffect(()=>{
+        //Default the the theme to LIGHT, as Dark messes with the login page
+        appContext.setLightTheme();
         appContext.removeLocalStorageItem('user-details');
     },[]);
 

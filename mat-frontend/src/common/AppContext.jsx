@@ -14,7 +14,10 @@ export class AppProvider extends Component {
             themePalette:'light',
             toggleTheme:()=>{                
                 this.setState(prev=>({themePalette: prev.themePalette === 'light' ? 'dark' : 'light'}));
-            },                        
+            },
+            setLightTheme:()=>{                
+                this.setState({themePalette:'light'});
+            },
             addLocalStorageItem:(name, value) => {
                 localStorage.setItem(`quest-${name}`, value);
             }, 
