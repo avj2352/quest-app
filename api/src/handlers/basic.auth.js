@@ -35,7 +35,7 @@ export class BasicAuthentication {
     getUserDetailsByEmail (req, res) {        
             this.user.getUserByEmail(req.params.emailId)
             .then(data => {
-                console.log('Success!', data);
+                // console.log('Success!', data);
                 res.json(data);
             })
             .catch(err => {
