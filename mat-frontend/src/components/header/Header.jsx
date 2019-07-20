@@ -9,6 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Typography from '@material-ui/core/Typography';
+import SearchIcon from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
 //CSS in JS
 import { styles } from './header-style';
 import { AppContext } from '../../common/AppContext';
@@ -17,8 +19,7 @@ const Header = props => {
     const appContext = useContext(AppContext);
     const { classes, open } = props;
     return(
-        <AppBar
-          position="fixed"
+        <AppBar          
           className={classNames(classes.appBar, {
             [classes.appBarShift]: open,
           })}>
@@ -35,11 +36,25 @@ const Header = props => {
             <Typography variant="h6" color="inherit" noWrap>
               {`${appContext.title} (v${appContext.version})`}
             </Typography>
-            <IconButton 
-            edge="end"
-            color="inherit">
+            
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'Search' }}
+            />
+            </div>
+
+            <IconButton edge="end" color="inherit" className={classes.sideButton}>
               <MoreIcon />
             </IconButton>
+                        
           </Toolbar>
         </AppBar>
     );
