@@ -29,6 +29,7 @@ import smallLogo from './../../assets/icon-small.png';
 const Sidebar = props => {
     const appContext = useContext(AppContext);
     const [modalOpen, setModalOpen] = useState(false);
+
     const toggleMode = () => {
       appContext.toggleTheme();
     }
@@ -61,7 +62,7 @@ const Sidebar = props => {
             <List>            
               <ListItem button onClick={toggleMode}>
                 <ListItemIcon>
-                    <SwapHorizIcon /> 
+                    <SwapHorizIcon />
                 </ListItemIcon>
                 <ListItemText primary="Toggle Mode" />
               </ListItem>
