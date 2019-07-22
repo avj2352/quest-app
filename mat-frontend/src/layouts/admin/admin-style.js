@@ -37,6 +37,7 @@ export const styles = theme => ({
     justifyContent: 'flex-end',
   },
   content: {
+    // border: '1px solid blue',
     position:'relative',
     top:'5vh',
     left:'-4vw',
