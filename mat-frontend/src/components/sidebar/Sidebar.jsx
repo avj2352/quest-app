@@ -60,10 +60,10 @@ const Sidebar = props => {
       }
       getCategoriesWithEmail(email)
       .then(res => {
-        console.log('Data is: ', res);
+        // console.log('Data is: ', res);
         if (res.data) {
           res.data.map( item => {
-            console.log('Item detail is: ', item);
+            // console.log('Item detail is: ', item);
             navList.push ({ name: item.title, link: item.slug, id: item._id});
           });
         }
@@ -71,6 +71,13 @@ const Sidebar = props => {
         setLoading(false);
       });      
     },[]);
+
+    const allQuestionItem = <ListItem button onClick={()=> {window.location.href = `#/app/all`}}>
+        <ListItemIcon>
+          {showIcon('all')}
+        </ListItemIcon>
+        <ListItemText primary={`All Articles`} />
+      </ListItem>
 
     const navListItem = (listItems && listItems.length > 0) ? <React.Fragment>
       {listItems.map ((el) => {
@@ -85,20 +92,20 @@ const Sidebar = props => {
       })}
     </React.Fragment> : <React.Fragment></React.Fragment>;
 
-    const additionListItems = (userDetails && userDetails.premium) ? <React.Fragment>
-          <ListItem button onClick={()=> {window.location.href = '#/login'}}>
+    const premiumListItem = (userDetails && userDetails.premium) ? <React.Fragment>
+          <ListItem button onClick={()=> {window.location.href = '#/app/edit?g=questions'}}>
             <ListItemIcon>
             {showIcon('questions')}
             </ListItemIcon>
             <ListItemText primary="Add / Edit Questions" />
           </ListItem>
-            <ListItem button onClick={()=> {window.location.href = '#/login'}}>
+            <ListItem button onClick={()=> {window.location.href = '#/app/edit?g=groups'}}>
               <ListItemIcon>
               {showIcon('groups')}
               </ListItemIcon>
             <ListItemText primary="Add / Edit Groups" />
           </ListItem>          
-          <ListItem button onClick={()=> {window.location.href = '#/login'}}>
+          <ListItem button onClick={()=> {window.location.href = '#/app/edit?g=tags'}}>
               <ListItemIcon>
               {showIcon('tags')}
               </ListItemIcon>
@@ -130,10 +137,11 @@ const Sidebar = props => {
               <List>
                 <ListItem>
                   <CircularLoader display = {isLoading} />
-                </ListItem>                
+                </ListItem>   
+                {allQuestionItem}             
                 {navListItem}
                 <Divider />      
-                {additionListItems}
+                {premiumListItem}
               </List>
           </Drawer>
         </div>

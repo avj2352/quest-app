@@ -32,7 +32,7 @@ class App extends Component {
                     <Route path="/login" component={Login} />                    
                     <Redirect from="/" to="/app" />
                 </Switch>
-            </Router>
+        </Router>
         </div>
       </MuiThemeProvider>
     );

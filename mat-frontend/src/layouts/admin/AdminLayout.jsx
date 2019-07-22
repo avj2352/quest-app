@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import SimpleCard from '../../components/cards/Card.jsx';
+import { routeMap } from './admin-model';
 
 const AdminLayout = props => {    
     const [open, setOpen] = useState(false);
@@ -21,14 +22,21 @@ const AdminLayout = props => {
         setOpen(false);
     };
 
+    const getRoutes = () => {
+        if( props && props.location) {
+          return routeMap(props.location.pathname, props.location.search);
+        } else {
+          return null;
+        }              
+    };
+
     return(
         <div className={classes.root}>
             <CssBaseline />
             <Header open={open} handleDrawerOpen={handleDrawerOpen}/>
             <Sidebar open={open} handleDrawerClose={handleDrawerClose}/>
             <main className={classNames(classes.content, { [classes.contentShift]: open })}>
-              <SimpleCard/>
-              <Typography component="p">Hello World !!</Typography>
+                {getRoutes()}                
           </main>
         </div>
     );

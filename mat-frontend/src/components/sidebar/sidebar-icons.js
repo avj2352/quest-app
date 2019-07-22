@@ -13,11 +13,14 @@ import NodeIcon from '@material-ui/icons/Http';
 import QuestionIcon from '@material-ui/icons/QuestionAnswer';
 import GroupIcon from '@material-ui/icons/CardMembership';
 import TagIcon from '@material-ui/icons/SettingsEthernet';
+import AllIcon from '@material-ui/icons/Widgets';
 
 
 
 export const showIcon = (name) => {
     switch (name) {
+        case 'all':
+            return <AllIcon/>;
         case 'tags':
             return <TagIcon/>;
         case 'groups':
