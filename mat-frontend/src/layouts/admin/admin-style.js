@@ -32,24 +32,31 @@ export const styles = theme => ({
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
-    padding: '0 18px',
+    padding: '0 0',
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
   content: {
     // border: '1px solid blue',
+    width: '100%',
     position:'relative',
     top:'5vh',
     left:'-4vw',
     display:'flex',
     justifyContent:'center',
+    // alignItems: 'center',
     flexGrow: 1,
-    padding: theme.spacing(3),
+    paddingTop: theme.spacing(3),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: -drawerWidth,
+    marginLeft: -190,
+    [theme.breakpoints.up('md')]: {
+      marginLeft: theme.spacing(1),
+      width: '100%',
+      left:'-6vw',
+    },
   },
   contentShift: {
     transition: theme.transitions.create('margin', {
@@ -58,4 +65,5 @@ export const styles = theme => ({
     }),
     marginLeft: 0,
   },
+
 });
