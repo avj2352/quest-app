@@ -11,23 +11,42 @@ import TagCard from './TagCard.jsx';
 import CircularLoader from './../../../components/loaders/circular-loader/CircularLoader.jsx';
 import { getAllTags } from './../../../common/async-requests';
 import { useSnackbar } from 'notistack';
+import TagUpdateModal from './TagUpdateModal.jsx';
 
 const TagView = props => {
     const { classes } = props;
 
     //state
     const [tagDetails, setTagDetails] = useState(null);
-    const [isLoading, setLoading] = useState(true);
+    const [tagValue, setTagValue] = useState({id:'', name: '', description: ''});
+    const [isLoading, setLoading] = useState(false);
+    const [isModal, setModal] = useState(false);
     //snackBar
     const { enqueueSnackbar} = useSnackbar();
     
+    
+
+    const handleModalClose = (state, action) => {
+        console.log('Action was a: ', action);
+        setModal(state);
+    }
+
+    const handleTagEdit = (data) => {
+        console.log('Selected Tag detail is: ', data);
+        setTagValue(data);
+        setModal(true);
+    }
+
+    const handleTagDelete = (data) => {
+        console.log('Tag to be deleted: ', data);        
+    }
+
     // render tagCard list
     const tagCardList = tagDetails && tagDetails.map((el, index) => {
         return (
-            <TagCard key={index} id={el._id} name={el.name} description={el.description}/>
+            <TagCard key={index} id={el._id} name={el.name} description={el.description} onEdit={handleTagEdit} onDelete={handleTagDelete} />
         );
     });
-
 
     //componentDidMount
     useEffect(()=>{
@@ -52,7 +71,13 @@ const TagView = props => {
                     <Grid item xs={12} md={12}>
                         <CircularLoader display={isLoading}/>
                     </Grid>
-                    {tagCardList}                          
+                    {tagCardList}
+                    <TagUpdateModal 
+                        id={tagValue.id} 
+                        name={tagValue.name} 
+                        description={tagValue.description} 
+                        open={isModal} 
+                        onModalClose={handleModalClose} />
                 </Grid>
             </div>            
         </div>

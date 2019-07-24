@@ -70,6 +70,14 @@ const TagCard = props => {
       </React.Fragment>
     );
 
+    const editTag = () => {
+      props.onEdit({id: props.id, name: props.name, description: props.description});
+    };
+
+    const deleteTag = () => {
+      props.onDelete({id: props.id, name: props.name, description: props.description});
+    }
+
     return (
         <Grid item xs={12} md={4}>
             <Card className={classes.card}>
@@ -81,14 +89,14 @@ const TagCard = props => {
                     <SimpleBadge name={props.name} description={props.description} />
                 </CardContent>
                 <CardActions className={classes.action}>
-                  <Fab className={classes.fab} size="small" color="primary" aria-label="Update" className={classes.fab}>
+                  <Fab className={classes.fab} size="small" color="primary" aria-label="Update" className={classes.fab} onClick={editTag}>
                     <EditIcon/>
                   </Fab>
-                  <Fab className={classes.fab} size="small" aria-label="Delete" className={classes.fab}>
+                  <Fab className={classes.fab} size="small" aria-label="Delete" className={classes.fab} onClick={deleteTag}>
                     <DeleteIcon/>
                   </Fab>                    
                 </CardActions>
-            </Card>
+            </Card>          
         </Grid>
     );
 }
@@ -96,6 +104,8 @@ const TagCard = props => {
 TagCard.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
     description: PropTypes.string.isRequired
 };
 
