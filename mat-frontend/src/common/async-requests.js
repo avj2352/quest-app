@@ -26,3 +26,8 @@ export const getCategoriesWithEmail = (email) => {
     }
     return axios.get(`/filtered/group`, {headers});
 }
+
+
+export const getAllTags = () => {
+    return axios.get(`/tag`);
+}

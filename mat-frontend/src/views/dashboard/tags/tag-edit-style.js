@@ -6,13 +6,11 @@ export const styles = theme => ({
     display: 'flex',
     marginTop: '5px',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    flexGrow: 1
-  },
-  headerText: {
-      paddingleft: '10px'
-  },
+    flexGrow: 1,
+    paddingBottom: '20px'
+  },  
   cardContent: {
     width: '90%',
     marginTop: '30px',

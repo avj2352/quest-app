@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import deepPurple from '@material-ui/core/colors/deepPurple';
+import purple from '@material-ui/core/colors/purple';
 import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { AppContext } from './common/AppContext';
 import Login from './views/login/Login.jsx';
@@ -20,8 +21,8 @@ class App extends Component {
         typography: {
             useNextVariants: true,
         },
-        palette:{
-            primary: deepPurple,
+        palette: {
+            primary: purple,
             type: themePalette
         }
       })}>

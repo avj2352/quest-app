@@ -1,4 +1,6 @@
 import React, {useState, useContext} from 'react';
+import { SnackbarProvider } from 'notistack';
+
 import {styles} from './admin-style';
 import { withStyles } from '@material-ui/core/styles';
 import Sidebar from '../../components/sidebar/Sidebar';
@@ -30,15 +32,17 @@ const AdminLayout = props => {
         }              
     };
 
-    return(
-        <div className={classes.root}>
-            <CssBaseline />
-            <Header open={open} handleDrawerOpen={handleDrawerOpen}/>
-            <Sidebar open={open} handleDrawerClose={handleDrawerClose}/>
-            <main className={classNames(classes.content, { [classes.contentShift]: open })}>
-                {getRoutes()}                
-          </main>
-        </div>
+    return (
+        <SnackbarProvider maxSnack={3}>
+            <div className={classes.root}>
+                <CssBaseline />
+                <Header open={open} handleDrawerOpen={handleDrawerOpen}/>
+                <Sidebar open={open} handleDrawerClose={handleDrawerClose}/>
+                <main className={classNames(classes.content, { [classes.contentShift]: open })}>
+                    {getRoutes()}                
+            </main>
+            </div>
+        </SnackbarProvider>
     );
 }
 
