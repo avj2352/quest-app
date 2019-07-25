@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 // Material
-import { withStyles, theme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -55,16 +55,19 @@ const styles = theme => ({
 
 const TagCard = props => {
     const { classes } = props;
-    const { enqueueSnackbar} = useSnackbar();
+    const { enqueueSnackbar, closeSnackbar} = useSnackbar();
 
     //snackbar with prompt
     // add multiple actions to one snackbar
     const action = (key) => (
       <React.Fragment>
-          <Button onClick={() =>{ return console.log('Alert button pressed!'); }}>
+          <Button onClick={() =>{ 
+            closeSnackbar(key);
+            props.onDelete({id: props.id, name: props.name, description: props.description}); 
+            }}>
               {'Yes'}
           </Button>
-          <Button onClick={() => { return console.log('Dismiss button pressed!'); }}>
+          <Button onClick={() => { closeSnackbar(key); }}>
               {'No'}
           </Button>
       </React.Fragment>
@@ -75,7 +78,7 @@ const TagCard = props => {
     };
 
     const deleteTag = () => {
-      props.onDelete({id: props.id, name: props.name, description: props.description});
+      enqueueSnackbar(`Are you sure you want to delete this tag?`, {variant: 'warning', action});
     }
 
     return (
@@ -89,10 +92,10 @@ const TagCard = props => {
                     <SimpleBadge name={props.name} description={props.description} />
                 </CardContent>
                 <CardActions className={classes.action}>
-                  <Fab className={classes.fab} size="small" color="primary" aria-label="Update" className={classes.fab} onClick={editTag}>
+                  <Fab className={classes.fab} size="small" color="primary" aria-label="Update" onClick={editTag}>
                     <EditIcon/>
                   </Fab>
-                  <Fab className={classes.fab} size="small" aria-label="Delete" className={classes.fab} onClick={deleteTag}>
+                  <Fab className={classes.fab} size="small" aria-label="Delete" onClick={deleteTag}>
                     <DeleteIcon/>
                   </Fab>                    
                 </CardActions>

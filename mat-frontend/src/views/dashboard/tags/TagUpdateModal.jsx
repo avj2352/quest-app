@@ -1,7 +1,7 @@
 /**
  * Tag Update Modal Screen
  */
-import React, {useState, useEffect, useRef } from 'react';
+import React, {useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -10,7 +10,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
 import Typography from '@material-ui/core/Typography';
 //custom
 import LinearLoader from './../../../components/loaders/linear-loader/LinearLoader.jsx';

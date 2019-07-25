@@ -27,7 +27,7 @@ export const getCategoriesWithEmail = (email) => {
     return axios.get(`/filtered/group`, {headers});
 }
 
-// TAGS
+// CRUD TAGS
 export const getAllTags = () => {
     return axios.get(`/tag`);
 }
@@ -44,4 +44,8 @@ export const createNewTag = (data) => {
         name: data.name,
         description: data.description
     });
+}
+
+export const deleteTagById = (id) => {
+    return axios.delete(`/tag/${id}`);
 }

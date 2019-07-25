@@ -1,15 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 // CSS
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { styles } from './tag-edit-style';
 import TagCreate from './TagCreate.jsx';
 import TagCard from './TagCard.jsx';
 import CircularLoader from './../../../components/loaders/circular-loader/CircularLoader.jsx';
-import { getAllTags } from './../../../common/async-requests';
+import { getAllTags, deleteTagById } from './../../../common/async-requests';
 import { useSnackbar } from 'notistack';
 import TagUpdateModal from './TagUpdateModal.jsx';
 
@@ -67,6 +66,20 @@ const TagView = props => {
     }
 
     const handleTagDelete = (data) => {
+        setLoading(true);
+        const deletePromise = deleteTagById(data.id);
+        const allTagsPromise = getAllTags();
+        deletePromise.then(res => allTagsPromise, err => {
+            setLoading(false);
+            console.log('Error deleting tag: ', err);
+            enqueueSnackbar(`Error deleting Tag: ${data.name}, Please refresh page`, {variant: 'error'});
+        }).then(res => {
+            setLoading(false);
+            setTagDetails(res.data);
+            enqueueSnackbar(`Showing new data`, {variant: 'success'});
+        }, err => {
+
+        });
         console.log('Tag to be deleted: ', data);        
     }
 
