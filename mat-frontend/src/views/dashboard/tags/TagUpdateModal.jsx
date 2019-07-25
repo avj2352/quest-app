@@ -12,6 +12,9 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 import Typography from '@material-ui/core/Typography';
+//custom
+import LinearLoader from './../../../components/loaders/linear-loader/LinearLoader.jsx';
+import { updateTagByName } from './../../../common/async-requests';
 
 export const useStyles = makeStyles(theme => ({    
     validationText: {
@@ -30,16 +33,28 @@ const TagUpdateModal = props => {
     
     //state
     const [tagName, setTagName] = useState(null);
+    const [isLoading, setLoading] = useState(false);
     const [tagDescription, setTagDescription] = useState(null);
     const [tagId, setTagId] = useState(props.id);
     const [errMsg, setErrMsg] = useState(null);
 
     const handleClose = (data)=>{
-        props.onModalClose(false, 'cancel');        
+        props.onModalClose(false, 'cancel');
     };
 
     const handleSubmit = () => {
-        console.log('tagName and tagDescription', tagName, tagDescription);
+        setLoading(true);
+        if(tagName && tagDescription) {
+          updateTagByName({name: props.name, newName: tagName.toLowerCase(), description: tagDescription})
+          .then( res => {
+            setLoading(false);            
+            props.onModalClose(false, 'success');
+          }, err => {
+            setLoading(false);
+            console.log('Error updating tag record: ', err);
+            props.onModalClose(false, 'failure');
+          });          
+        }
     };
 
     const handleChange = prop => event => {        
@@ -70,6 +85,7 @@ const TagUpdateModal = props => {
         <DialogTitle id="alert-dialog-title">{"Update Tag Details"}</DialogTitle>
         <DialogContent>
             {errorMsgText}
+            <LinearLoader display={isLoading}/>
         <TextField
             margin="normal"
             required

@@ -27,7 +27,21 @@ export const getCategoriesWithEmail = (email) => {
     return axios.get(`/filtered/group`, {headers});
 }
 
-
+// TAGS
 export const getAllTags = () => {
     return axios.get(`/tag`);
+}
+
+export const updateTagByName = (data) => {
+    return axios.put(`/tagName/${data.name}`, {
+        name: data.newName,
+        description: data.description
+    });
+}
+
+export const createNewTag = (data) => {
+    return axios.post('/tag', {
+        name: data.name,
+        description: data.description
+    });
 }

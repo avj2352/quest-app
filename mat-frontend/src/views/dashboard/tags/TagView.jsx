@@ -25,11 +25,40 @@ const TagView = props => {
     const { enqueueSnackbar} = useSnackbar();
     
     
+    const handleTagCreate = (action) => {
+        console.log('Action was a: ', action);
+        if(action === 'success') {
+            enqueueSnackbar(`Tag record created !`, {variant: 'info'});
+            refreshTagDetails();
+        } else if (action === 'failure') {
+            enqueueSnackbar(`Error creating Tag record...`, {variant: 'error'});
+        }        
+    }
 
     const handleModalClose = (state, action) => {
         console.log('Action was a: ', action);
+        if(action === 'success') {
+            enqueueSnackbar(`Tag record updated !`, {variant: 'info'});
+            refreshTagDetails();
+        } else if (action === 'failure') {
+            enqueueSnackbar(`Error updating Tag record...`, {variant: 'error'});
+        }
         setModal(state);
     }
+
+    const refreshTagDetails = () => {
+        setLoading(true);
+        getAllTags()
+        .then(res => {
+            setTagDetails(res.data);
+            setLoading(false);
+            enqueueSnackbar(`Tags loaded successfully !`, {variant: 'success'});
+        }, err => {
+            console.log('Error loading tags', err);
+            enqueueSnackbar(`Error loading tags, Please refresh page`, {variant: 'error'});
+        });              
+    };
+
 
     const handleTagEdit = (data) => {
         console.log('Selected Tag detail is: ', data);
@@ -50,15 +79,7 @@ const TagView = props => {
 
     //componentDidMount
     useEffect(()=>{
-        getAllTags()
-        .then(res => {
-            setTagDetails(res.data);
-            setLoading(false);
-            enqueueSnackbar(`Tags loaded successfully !`, {variant: 'success'});
-        }, err => {
-            console.log('Error loading tags', err);
-            enqueueSnackbar(`Error loading tags, Please refresh page`, {variant: 'error'});
-        });                
+         refreshTagDetails();
     },[]);
 
     //render
@@ -67,7 +88,7 @@ const TagView = props => {
             <CssBaseline />                
             <div className={classes.cardContent}>
                 <Grid container spacing={1}>                    
-                    <TagCreate/>
+                    <TagCreate onCreateTag={handleTagCreate}/>
                     <Grid item xs={12} md={12}>
                         <CircularLoader display={isLoading}/>
                     </Grid>
