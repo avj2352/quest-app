@@ -1,5 +1,5 @@
 import React from 'react';
-import GroupEdit from '../../views/dashboard/groups/GroupEdit.jsx';
+import GroupView from '../../views/dashboard/groups/GroupView.jsx';
 import QuestionEdit from '../../views/dashboard/questionnaire/QuestionEdit.jsx';
 import TagView from '../../views/dashboard/tags/TagView.jsx';
 import NotFound from './../../views/dashboard/not-found/NotFound.jsx';
@@ -12,7 +12,7 @@ export const routeMap = (path, search) => {
             case '?g=tags':
                 return <TagView/>;                
             case '?g=groups':
-                return <GroupEdit/> ;
+                return <GroupView/> ;
             default:
                 return <NotFound/>;
         }
