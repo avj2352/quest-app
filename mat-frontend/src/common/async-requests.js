@@ -49,3 +49,9 @@ export const createNewTag = (data) => {
 export const deleteTagById = (id) => {
     return axios.delete(`/tag/${id}`);
 }
+
+// CRUD GROUPS
+
+export const getAllGroups = () => {
+    return axios.get(`/group`);
+};

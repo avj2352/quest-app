@@ -92,7 +92,7 @@ const GroupCreate = (props) => {
   const handleSubmit = () => {
     setLoading(true);
     if(groupTitle && groupDescription && groupSlug) {
-        console.log('Input data is: ', groupTitle, groupSlug, groupDescription, isChecked);
+        console.log('Input data is: ', groupTitle, groupSlug, groupDescription, isChecked);        
     }
   };
 
@@ -160,7 +160,7 @@ const GroupCreate = (props) => {
 };
 
 GroupCreate.propTypes = {
-  onCreateTag: PropTypes.func.isRequired
+  onCreateGroup: PropTypes.func.isRequired
 }
 
 export default GroupCreate;
