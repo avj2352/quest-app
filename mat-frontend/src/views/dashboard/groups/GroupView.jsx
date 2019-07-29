@@ -40,7 +40,8 @@ const GroupView = props => {
     }
 
     const handleModalClose = (state, action) => {
-        console.log('Modal close!');
+        setModal(false);
+        console.log('Modal close!', state, action);
     }
 
     //componentDidMount
