@@ -10,7 +10,7 @@ import { styles } from './group-edit-styles';
 import GroupCreate from './GroupCreate.jsx';
 import GroupCard from './GroupCard.jsx';
 import CircularLoader from './../../../components/loaders/circular-loader/CircularLoader.jsx';
-import { getAllGroups } from './../../../common/async-requests';
+import { getAllGroups, deleteGroupById } from './../../../common/async-requests';
 import GroupUpdateModal from './GroupUpdateModal.jsx';
 
 const GroupView = props => {
@@ -21,31 +21,19 @@ const GroupView = props => {
     // states
     const [isLoading, setLoading] = useState(true);
     const [groupList, setGroupList] = useState([]);
-    const [groupValue, setGroupValue] = useState({id: '', name: '', slug:'', description: '', premium: false });
+
+    const [groupValue, setGroupValue] = useState({
+        id: '',
+        name: '',
+        slug:'',
+        description: '',
+        premium: false
+    });
+
     const [isModal, setModal] = useState(false);
 
-    // event handlers
-    const handleGroupCreate = () => {
-        console.log('Handler called');
-    }
-
-    const handleGroupEdit = (data) => {
-        console.log('Handling Group Edit', data);
-        setGroupValue(data);
-        setModal(true);
-    }
-
-    const handleGroupDelete = (data) => {
-        console.log('Handling Group Delete', data);
-    }
-
-    const handleModalClose = (state, action) => {
-        setModal(false);
-        console.log('Modal close!', state, action);
-    }
-
-    //componentDidMount
-    useEffect(()=>{
+    // lifecycle methods
+    const refreshGroupDetails = () => {
         getAllGroups()
         .then(res => {
             setLoading(false);
@@ -56,12 +44,64 @@ const GroupView = props => {
             console.log('Error loading Groups', err);
             enqueueSnackbar(`Error loading Groups, Please refresh page`, {variant: 'error'});
         });
+    };
 
+    // event handlers
+    const handleGroupCreate = (action) => {
+        console.log('Action was a: ', action);
+        if(action === 'success') {
+            enqueueSnackbar(`Group record created !`, {variant: 'info'});
+            refreshGroupDetails();
+        } else if (action === 'failure') {
+            enqueueSnackbar(`Error creating Group record...`, {variant: 'error'});
+        }
+    };
+
+    const handleGroupEdit = (data) => {
+        console.log('Handling Group Edit', data);
+        setGroupValue(data);
+        setModal(true);
+    };
+
+    const handleGroupDelete = (data) => {
+        // console.log('Handling Group Delete', data);
+        setLoading(true);
+        const deletePromise = deleteGroupById(data.id);
+        const allGroupsPromise = getAllGroups();
+        deletePromise.then(res => allGroupsPromise, err => {
+            setLoading(false);
+            console.log('Error deleting Group: ', err);
+            enqueueSnackbar(`Error deleting Group: ${data.name}, Please refresh page`, {variant: 'error'});
+        }).then(res => {
+            setLoading(false);
+            setGroupList(res.data);
+            enqueueSnackbar(`Showing new data`, {variant: 'success'});
+        }, err => {
+            setLoading(false);
+            console.log('Error deleting Group: ', err);
+            enqueueSnackbar(`Error deleting Group: ${data.name}, Please refresh page`, {variant: 'error'});
+        });        
+    };
+
+    const handleModalClose = (state, action) => {
+        console.log('Action was a: ', action);
+        if(action === 'success') {
+            enqueueSnackbar(`Group record updated !`, {variant: 'info'});
+            refreshGroupDetails();
+        } else if (action === 'failure') {
+            enqueueSnackbar(`Error updating Group record...`, {variant: 'error'});
+        }
+        setModal(state);
+    };
+
+    //componentDidMount
+    useEffect(()=>{
+        refreshGroupDetails();
     },[]);
 
     // Render group list
-    const groupListDom = groupList.length > 0 && groupList.map((el, index) => <GroupCard 
-        key={index} 
+    const groupListDom = groupList.length > 0 && groupList.map((el, index) => <GroupCard
+        key={index}
         id={el._id}
         title={el.title}
         slug={el.slug}
@@ -76,7 +116,7 @@ const GroupView = props => {
         <div className = {classes.root}>
             <CssBaseline />
             <div className={classes.cardContent}>
-                <Grid container spacing={1}>                    
+                <Grid container spacing={1}>
                     <GroupCreate onCreateGroup={handleGroupCreate}/>
                     <Grid item xs={12} md={12}>
                         <CircularLoader display={isLoading}/>
@@ -89,8 +129,7 @@ const GroupView = props => {
                         slug = {groupValue.slug}
                         description = {groupValue.description}
                         premium = {groupValue.premium}
-                        onModalClose = {handleModalClose}
-                    />
+                        onModalClose = {handleModalClose}/>
                 </Grid>
             </div>            
         </div>

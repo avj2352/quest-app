@@ -80,9 +80,11 @@ const TagView = props => {
             setTagDetails(res.data);
             enqueueSnackbar(`Showing new data`, {variant: 'success'});
         }, err => {
-
+            setLoading(false);
+            console.log('Error deleting tag: ', err);
+            enqueueSnackbar(`Error deleting Tag: ${data.name}, Please refresh page`, {variant: 'error'});
         });
-        console.log('Tag to be deleted: ', data);        
+        // console.log('Tag to be deleted: ', data);        
     }
 
     // render tagCard list

@@ -62,7 +62,7 @@ const GroupCard = props => {
       <React.Fragment>
           <Button onClick={() =>{ 
             closeSnackbar(key);
-            props.onDelete({id: props.id, name: props.name, description: props.description}); 
+            props.onDelete({id: props.id, name: props.title, slug: props.slug, description: props.description, premium: props.premium});
             }}>
               {'Yes'}
           </Button>

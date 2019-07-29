@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 // custom
 import LinearLoader from './../../../components/loaders/linear-loader/LinearLoader.jsx';
-import { createNewTag } from './../../../common/async-requests';
+import { createNewGroup } from './../../../common/async-requests';
 
 const useStyles = makeStyles({
   card: {
@@ -57,7 +57,7 @@ const useStyles = makeStyles({
 });
 
 const GroupCreate = (props) => {
-  const classes = useStyles();  
+  const classes = useStyles();
 
   // state
   const [groupTitle, setGroupTitle] = useState('');
@@ -92,7 +92,15 @@ const GroupCreate = (props) => {
   const handleSubmit = () => {
     setLoading(true);
     if(groupTitle && groupDescription && groupSlug) {
-        console.log('Input data is: ', groupTitle, groupSlug, groupDescription, isChecked);        
+        console.log('Input data is: ', groupTitle, groupSlug, groupDescription, isChecked);
+        createNewGroup({name:groupTitle, slug: groupSlug.toLowerCase(), description: groupDescription, premium: isChecked})
+        .then(res => {
+          setLoading(false);
+          props.onCreateGroup('success');
+        }, err => {
+          setLoading(false);
+          props.onCreateGroup('failure');
+        });
     }
   };
 

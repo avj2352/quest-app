@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 //custom
 import LinearLoader from './../../../components/loaders/linear-loader/LinearLoader.jsx';
-import { updateTagByName } from './../../../common/async-requests';
+import { updateGroupById } from './../../../common/async-requests';
 
 export const useStyles = makeStyles(theme => ({    
     validationText: {
@@ -35,7 +35,7 @@ const GroupUpdateModal = props => {
     const [groupTitle, setGroupTitle] = useState(null);
     const [groupSlug, setGroupSlug] = useState(null);
     const [groupDescription, setGroupDescription] = useState(null);
-    const [isChecked, setChecked] = useState(false);
+    const [isChecked, setChecked] = useState(props.premium);
     const [isLoading, setLoading] = useState(false);
     const [tagId, setTagId] = useState(props.id);
     const [errMsg, setErrMsg] = useState(null);
@@ -45,13 +45,14 @@ const GroupUpdateModal = props => {
     };
 
     const handleCheckboxChange = (evt) => {
-      setChecked(evt.target.value);
+      setChecked(evt.target.checked);
     }
 
     const handleSubmit = () => {
         setLoading(true);
-        if(groupTitle && groupDescription) {
-          updateTagByName({name: props.name, newName: groupTitle, description: groupDescription})
+        console.log('Change details are: ', groupTitle, groupDescription, groupSlug, isChecked);
+        if(groupTitle && groupDescription && groupSlug) {
+          updateGroupById({id:props.id, name: groupTitle, slug: groupSlug, description: groupDescription, premium: isChecked})
           .then( res => {
             setLoading(false);            
             props.onModalClose(false, 'success');
@@ -61,6 +62,7 @@ const GroupUpdateModal = props => {
             props.onModalClose(false, 'failure');
           });          
         }
+        setLoading(false);
     };
 
     const handleChange = prop => event => {        
@@ -69,11 +71,13 @@ const GroupUpdateModal = props => {
         } else {
             setErrMsg(`Require Tag Name and Description`);
         }
-        if (event.target.name === 'name') {
+        if (event.target.name === 'title') {
           setGroupTitle(event.target.value);
+        } else if (event.target.name === 'slug') {            
+          setGroupSlug(event.target.value);
+        } else if (event.target.name === 'description') {
           setGroupDescription(event.target.value);
-        } else {            
-        }        
+        }
     };
 
     const errorMsgText = <Typography className={classes.validationText} component="p">
@@ -124,8 +128,8 @@ const GroupUpdateModal = props => {
             defaultValue = {props.description}
             onBlur={handleChange()}/>
         <div className={classes.checkBoxContent}>
-            <Checkbox
-            checked={props.premium}
+            <Checkbox            
+            checked = {isChecked}
             onChange={handleCheckboxChange}
             inputProps={{
             'aria-label': 'primary checkbox',
