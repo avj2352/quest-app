@@ -12,11 +12,15 @@ export class AppProvider extends Component {
             version:'3.0.1',
             title:'Quest App',
             themePalette:'light',
+            isHeaderSearch: true,
             toggleTheme:()=>{                
                 this.setState(prev=>({themePalette: prev.themePalette === 'light' ? 'dark' : 'light'}));
             },
             setLightTheme:()=>{                
                 this.setState({themePalette:'light'});
+            },
+            setHeaderSearch:(val)=>{
+                this.setState({isHeaderSearch: val});
             },
             addLocalStorageItem:(name, value) => {
                 localStorage.setItem(`quest-${name}`, value);

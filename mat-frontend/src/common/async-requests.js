@@ -56,6 +56,10 @@ export const getAllGroups = () => {
     return axios.get(`/group`);
 };
 
+export const getAllGroupsWithQuestions = () => {
+    return axios.get(`/groupWithQuestions`);
+}
+
 export const createNewGroup = (data) => {
     return axios.post(`/group`, {
         title: data.name,

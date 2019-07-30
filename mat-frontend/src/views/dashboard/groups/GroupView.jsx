@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { useSnackbar } from 'notistack';
 // CSS
@@ -39,7 +38,7 @@ const GroupView = props => {
             setLoading(false);
             enqueueSnackbar(`Groups loaded successfully !`, {variant: 'success'});
             setGroupList(res.data);
-            console.log('Group list is: ', res.data);
+            // console.log('Group list is: ', res.data);
         }, err => {
             console.log('Error loading Groups', err);
             enqueueSnackbar(`Error loading Groups, Please refresh page`, {variant: 'error'});

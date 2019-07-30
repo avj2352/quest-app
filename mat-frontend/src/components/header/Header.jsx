@@ -24,7 +24,19 @@ const Header = props => {
     const { classes, open } = props;
 
     
-
+    const displaySearch = appContext.isHeaderSearch && <div className={classes.search}>
+    <div className={classes.searchIcon}>
+      <SearchIcon />
+    </div>
+  <InputBase
+    placeholder="Search…"
+    classes={{
+      root: classes.inputRoot,
+      input: classes.inputInput,
+    }}
+    inputProps={{ 'aria-label': 'Search' }}
+  />
+  </div>;
     
 
     return(
@@ -44,19 +56,7 @@ const Header = props => {
             <Typography variant="h6" color="inherit" noWrap>
               {`${appContext.title}`}
             </Typography>            
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'Search' }}
-            />
-            </div>
+            {displaySearch}
             <IconButton edge="end" color="inherit" className={classes.sideButton}>              
               <MenuDropDown/>
             </IconButton>
