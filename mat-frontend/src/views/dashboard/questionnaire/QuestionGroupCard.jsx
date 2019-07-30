@@ -12,6 +12,7 @@ import Fab from '@material-ui/core/Fab';
 import FilterIcon from '@material-ui/icons/FilterList';
 // Custom
 import SimpleBadge from './../../../components/badges/SimpleBadge.jsx';
+import CircularBadge from '../../../components/badges/CircularBadge.jsx';
 
 const styles = theme => ({
     card: {
@@ -35,6 +36,12 @@ const styles = theme => ({
     },
     chip: {
         margin: theme.spacing(1),
+    },
+    row: {
+      // border:'1px solid red',
+      justifyContent: 'space-between',
+      display: 'flex',
+      width: '100%'
     },
     pos: {
       textAlign: 'left',
@@ -62,11 +69,14 @@ const QuestionGroupCard = props => {
         <Grid item xs={12} md={4}>
             <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
-                    <Typography variant="h5" component="h2">{props.title}</Typography>
+                    <div className={classes.row}>
+                      <Typography variant="h5" component="h2">{props.title}</Typography>
+                      <CircularBadge count={props.count} />
+                    </div>
                     <Typography className={classes.pos} component="p">
                         {props.description}
                     </Typography>     
-                    <SimpleBadge name={`Questions ${props.count}`} description={`${props.count} questions / articles in this group`}/>
+                    
                 </CardContent>
                 <CardActions className={classes.action}>
                   <Fab disabled={props.count === 0} className={classes.fab} size="small" color="primary" aria-label="Group" onClick={filterUsingGroup}>

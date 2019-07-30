@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
+import { useSnackbar } from 'notistack';
 // Custom
 import { styles } from './question-edit-style';
 import QuestionCreate from './QuestionCreate.jsx';
@@ -15,6 +16,8 @@ const QuestionView = props => {
     // states
     const [isLoading, setLoading] = useState(false);
     const [groupList, setGroupList] = useState(null);
+    // snackbar
+    const { enqueueSnackbar} = useSnackbar();
 
     const { classes } = props;
 
@@ -27,9 +30,11 @@ const QuestionView = props => {
         setLoading(true);
         getAllGroupsWithQuestions()
         .then(res => {
-            console.log('Result is: ', res.data);
+            enqueueSnackbar(`Groups loaded successfully`, {variant: 'success'});
             setLoading(false);
             setGroupList(res.data);
+        }, err => {
+            enqueueSnackbar(`Error loading Groups !`, {variant: 'failure'});
         });
     },[]);
 
