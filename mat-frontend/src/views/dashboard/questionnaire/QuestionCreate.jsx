@@ -69,18 +69,7 @@ const QuestionCreate = (props) => {
   };
 
   const handleSubmit = () => {
-    setLoading(true);
-    if(tagName && tagDescription) {
-      createNewTag({name: tagName.toLowerCase(), description: tagDescription})
-      .then( res => {
-        setLoading(false);            
-        props.onCreateTag('success');
-      }, err => {
-        setLoading(false);
-        console.log('Error updating tag record: ', err);
-        props.onCreateTag('failure');
-      });          
-    }
+    window.location.href = '#/app/editor?q=add';
   };
   
     

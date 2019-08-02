@@ -37,8 +37,9 @@ const AdminLayout = props => {
     };
 
     // componentDidMount
-    useEffect(()=>{        
-        if (props.location.pathname === '/app/edit') appContext.setHeaderSearch(false);
+    useEffect(()=>{
+        const urlPath = props.location.pathname;
+        if (urlPath === '/app/admin' || urlPath === '/app/editor') appContext.setHeaderSearch(false);
         else appContext.setHeaderSearch(true);
     },[props.location]);
 

@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import { useSnackbar } from 'notistack';
 // Custom
-import { styles } from './question-edit-style';
+import { styles } from './question-admin-style.js';
 import QuestionCreate from './QuestionCreate.jsx';
 import CircularLoader from './../../../components/loaders/circular-loader/CircularLoader.jsx';
 import QuestionGroupCard from './QuestionGroupCard.jsx';

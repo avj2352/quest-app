@@ -93,19 +93,19 @@ const Sidebar = props => {
     </React.Fragment> : <React.Fragment></React.Fragment>;
 
     const premiumListItem = (userDetails && userDetails.premium) ? <React.Fragment>
-          <ListItem button onClick={()=> {window.location.href = '#/app/edit?g=questions'}}>
+          <ListItem button onClick={()=> {window.location.href = '#/app/admin?g=questions'}}>
             <ListItemIcon>
             {showIcon('questions')}
             </ListItemIcon>
             <ListItemText primary="Add / Edit Questions" />
           </ListItem>
-            <ListItem button onClick={()=> {window.location.href = '#/app/edit?g=groups'}}>
+            <ListItem button onClick={()=> {window.location.href = '#/app/admin?g=groups'}}>
               <ListItemIcon>
               {showIcon('groups')}
               </ListItemIcon>
             <ListItemText primary="Add / Edit Groups" />
           </ListItem>          
-          <ListItem button onClick={()=> {window.location.href = '#/app/edit?g=tags'}}>
+          <ListItem button onClick={()=> {window.location.href = '#/app/admin?g=tags'}}>
               <ListItemIcon>
               {showIcon('tags')}
               </ListItemIcon>
