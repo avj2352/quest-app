@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { SnackbarProvider } from 'notistack';
 
 import {styles} from './admin-style';
@@ -12,8 +12,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import SimpleCard from '../../components/cards/Card.jsx';
 import { routeMap } from './admin-model';
 
-const AdminLayout = props => {    
+const AdminLayout = props => {
+    // context
+    const appContext = useContext(AppContext);
+    //state
     const [open, setOpen] = useState(false);
+
     const { classes } = props;
     
     const handleDrawerOpen = () => {
@@ -31,6 +35,13 @@ const AdminLayout = props => {
           return null;
         }              
     };
+
+    // componentDidMount
+    useEffect(()=>{
+        const urlPath = props.location.pathname;
+        if (urlPath === '/app/admin' || urlPath === '/app/editor') appContext.setHeaderSearch(false);
+        else appContext.setHeaderSearch(true);
+    },[props.location]);
 
     return (
         <SnackbarProvider maxSnack={3}>

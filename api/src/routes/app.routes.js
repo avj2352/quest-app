@@ -40,6 +40,10 @@ const routes = (app) => {
     .get(group.getAllGroups)
     .post(group.addNewGroup);
 
+    // query
+    app.route('/groupWithQuestions')
+    .get(queries.getGroupsWithQuestions);
+
     // FILTERED GROUPS =============
     app.route('/filtered/group')
     .get(queries.filterGroupsByUserPremium);

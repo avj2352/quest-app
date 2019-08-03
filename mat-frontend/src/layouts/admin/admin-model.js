@@ -1,18 +1,30 @@
 import React from 'react';
-import GroupEdit from '../../views/dashboard/groups/GroupEdit.jsx';
-import QuestionEdit from '../../views/dashboard/questionnaire/QuestionEdit.jsx';
+import GroupView from '../../views/dashboard/groups/GroupView.jsx';
+import QuestionView from '../../views/dashboard/questionnaire/QuestionView.jsx';
 import TagView from '../../views/dashboard/tags/TagView.jsx';
 import NotFound from './../../views/dashboard/not-found/NotFound.jsx';
+import QuestionDetails from './../../views/dashboard/questionnaire/editor/QuestionDetails.jsx';
 
-export const routeMap = (path, search) => {    
-    if (path === '/app/edit') {
+export const routeMap = (path, search) => {
+    if (path === '/app/admin') {
         switch (search) {
             case '?g=questions':
-                return <QuestionEdit/> ;                
+                return <QuestionView/> ;                
             case '?g=tags':
                 return <TagView/>;                
             case '?g=groups':
-                return <GroupEdit/> ;
+                return <GroupView/> ;
+            default:
+                return <NotFound/>;
+        }
+    } else if (path === '/app/editor') {
+        switch (search) {
+            case '?q=add':
+                return <QuestionDetails/>;
+            case '?q=add&type=question':
+                return <QuestionDetails/>;
+            case '?q=add&type=answer':
+                return <QuestionDetails/>;
             default:
                 return <NotFound/>;
         }

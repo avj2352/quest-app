@@ -1,16 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+// Material
 import CssBaseline from '@material-ui/core/CssBaseline';
-// CSS
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { styles } from './tag-edit-style';
+import { useSnackbar } from 'notistack';
+// Custom
 import TagCreate from './TagCreate.jsx';
 import TagCard from './TagCard.jsx';
 import CircularLoader from './../../../components/loaders/circular-loader/CircularLoader.jsx';
 import { getAllTags, deleteTagById } from './../../../common/async-requests';
-import { useSnackbar } from 'notistack';
 import TagUpdateModal from './TagUpdateModal.jsx';
+// CSS
+import { styles } from './tag-edit-style';
 
 const TagView = props => {
     const { classes } = props;
@@ -78,9 +80,11 @@ const TagView = props => {
             setTagDetails(res.data);
             enqueueSnackbar(`Showing new data`, {variant: 'success'});
         }, err => {
-
+            setLoading(false);
+            console.log('Error deleting tag: ', err);
+            enqueueSnackbar(`Error deleting Tag: ${data.name}, Please refresh page`, {variant: 'error'});
         });
-        console.log('Tag to be deleted: ', data);        
+        // console.log('Tag to be deleted: ', data);        
     }
 
     // render tagCard list
