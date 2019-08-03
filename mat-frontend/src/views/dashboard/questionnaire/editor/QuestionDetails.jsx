@@ -28,14 +28,14 @@ const QuestionView = props => {
     
     // states
     const [isLoading, setLoading] = useState(false);
-    const [groupList, setGroupList] = useState(null);
+    const [groupList, setGroupList] = useState([]);
     const [tagList, setTagList] = useState(null);
     const [typeList, setTypeList] = useState([{display: 'Question', value: 'question'}, {display: 'Article', value: 'article'}]);
     const [selectedGroupList, setSelectedGroupList] = useState(null);
     const [questionType, setQuestionType] = useState(null);
     const [selectedTagList, setSelectedTagList] = useState([]);
     const [errorMsg, setErrMsg] = useState(null);
-    const [title, setTitle] = useState(null);
+    const [title, setTitle] = useState('');
     
     // snackbar
     const { enqueueSnackbar} = useSnackbar();
@@ -45,12 +45,11 @@ const QuestionView = props => {
     const handleChange = prop => event => {
         if(event.target.value !== '') {
             setErrMsg(null);
+            setTitle(event.target.value);
           } else {
+            setTitle('');
             setErrMsg(`Require Tag Name and Description`);
-          }  
-          if (event.target.name === 'name') {
-              setTitle(event.target.value);
-          }
+          }          
     };    
 
     const handleTagDelete = id => {
@@ -65,7 +64,7 @@ const QuestionView = props => {
     }
 
     const handleGroupSelect = (data) => {
-        console.log('Selected Group is: ', data);
+        setSelectedGroupList([data]);
     }
 
     const handleTagSelect = (data) => {
@@ -165,8 +164,11 @@ const QuestionView = props => {
                                 </Grid>
                             </CardContent>
                             <CardActions className={classes.action}>
-                                <Button variant="contained" size="medium" color="primary">Submit</Button>
-                                <Button size="medium" color="primary">Cancel</Button>
+                                <Button disabled={title === '' || selectedTagList.length === 0 || selectedGroupList.length === 0} 
+                                        variant="contained" 
+                                        size="medium" 
+                                        color="primary">Submit</Button>
+                                {/* <Button size="medium" color="primary">Cancel</Button> */}
                             </CardActions>
                         </Card>
                     </Grid>                    

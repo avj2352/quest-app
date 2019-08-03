@@ -13,12 +13,10 @@ export const QuestionnaireSchema = new Schema({
         required: 'QA type question or Article type'
     },    
     question: {
-        type: String,
-        required: 'Enter the Question'
+        type: String        
     },    
     answer: {
-        type: String,
-        required: 'Enter the Answer'
+        type: String        
     },
     date: {
         type: Number,

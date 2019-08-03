@@ -4,7 +4,7 @@
 import React from 'react';
 import StarIcon from '@material-ui/icons/Stars';
 import PolymerIcon from '@material-ui/icons/Polymer';
-import AngularIcon from '@material-ui/icons/Spellcheck';
+import AngularIcon from '@material-ui/icons/BrightnessAuto';
 import AlgoIcon from '@material-ui/icons/Subject';
 import DataIcon from '@material-ui/icons/Dashboard';
 import EsIcon from '@material-ui/icons/Bookmarks';
@@ -13,7 +13,9 @@ import NodeIcon from '@material-ui/icons/Http';
 import QuestionIcon from '@material-ui/icons/QuestionAnswer';
 import GroupIcon from '@material-ui/icons/CardMembership';
 import TagIcon from '@material-ui/icons/SettingsEthernet';
-import AllIcon from '@material-ui/icons/Widgets';
+import AllIcon from '@material-ui/icons/Home';
+import SortingIcon from '@material-ui/icons/LibraryBooks';
+import FlutterIcon from '@material-ui/icons/MobileFriendly';
 
 
 
@@ -41,6 +43,10 @@ export const showIcon = (name) => {
             return <AlgoIcon/>;
         case 'ds':
             return <DataIcon/>;
+        case 'sorting':
+            return <SortingIcon/>;
+        case 'flutter':
+            return <FlutterIcon/>;
         default:
             return <StarIcon/>;
     }
