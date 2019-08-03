@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 // material
 import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,23 +14,34 @@ import Button from '@material-ui/core/Button';
 // Custom
 import { styles } from './question-editor-style.js';
 import OutlinedDropDown from './../../../../components/dropdowns/OutlinedDropDown.jsx';
+import ActionableBadge from './../../../../components/badges/ActionableBadge.jsx';
 import QuestionCreate from './../QuestionCreate.jsx';
 import CircularLoader from './../../../../components/loaders/circular-loader/CircularLoader.jsx';
 import ArticleCard from './ArticleCard.jsx';
-import { getAllGroupsWithQuestions } from './../../../../common/async-requests';
+import { getAllGroups, getAllTags } from './../../../../common/async-requests';
+import { AppContext } from './../../../../common/AppContext.jsx';
+
 
 const QuestionView = props => {
+    // context
+    const appContext = useContext(AppContext);
+    
     // states
     const [isLoading, setLoading] = useState(false);
     const [groupList, setGroupList] = useState(null);
+    const [tagList, setTagList] = useState(null);
+    const [typeList, setTypeList] = useState([{display: 'Question', value: 'question'}, {display: 'Article', value: 'article'}]);
+    const [selectedGroupList, setSelectedGroupList] = useState(null);
+    const [questionType, setQuestionType] = useState(null);
+    const [selectedTagList, setSelectedTagList] = useState([]);
     const [errorMsg, setErrMsg] = useState(null);
     const [title, setTitle] = useState(null);
     
     // snackbar
     const { enqueueSnackbar} = useSnackbar();
-
     const { classes } = props;
 
+    // event handlers
     const handleChange = prop => event => {
         if(event.target.value !== '') {
             setErrMsg(null);
@@ -42,6 +53,35 @@ const QuestionView = props => {
           }
     };    
 
+    const handleTagDelete = id => {
+        console.log('Tag to be deleted', id);
+        setSelectedTagList(prev => {
+            return prev.splice(0, prev.indexOf(id));
+        });
+    }
+
+    const handleTypeSelect = (data) => {
+        console.log('Selected Type is: ', data);
+    }
+
+    const handleGroupSelect = (data) => {
+        console.log('Selected Group is: ', data);
+    }
+
+    const handleTagSelect = (data) => {
+        console.log('Selected Tag is: ', data);
+        setSelectedTagList(prev => {
+            return [...prev, data];
+        });
+    }
+
+    // renders
+    const cancelableBadges = (selectedTagList.length > 0) && selectedTagList.map((el, index) => {
+        const tempList = tagList.filter(item => {
+            return item.value === el;
+        });
+        return <ActionableBadge key={index} id={el} name={tempList[0].display} description={tempList[0].display} onDelete={handleTagDelete}/>
+    })
     
 
     // Question / Answer Card
@@ -52,7 +92,38 @@ const QuestionView = props => {
 
     // componentDidMount
     useEffect(()=>{
-        setLoading(true);        
+        setLoading(true);
+        const allTagPromise = getAllTags();
+        const allGroupPromise = getAllGroups();
+        allTagPromise.then(res => {
+            const dataOneList = res.data.map(el => {
+                return {
+                    display: el.name,
+                    value: el._id
+                };
+            });
+            setTagList(dataOneList);
+            console.log('Tag List is: ', dataOneList);
+            return allGroupPromise;
+        }, err => {
+            setLoading(false);
+            console.log('Error loading Tags', err);
+            enqueueSnackbar(`Error loading Tags!`, {variant: 'error'});
+        }).then( res1 => {
+            const dataTwoList = res1.data.map(el => {
+                return {
+                    display: el.title,
+                    value: el._id
+                };
+            });
+            setGroupList(dataTwoList);
+            console.log('Group List is: ', dataTwoList);
+            enqueueSnackbar(`Dropdown options loaded successfully !`, {variant: 'success'});
+            setLoading(false);
+        }, err => {
+            setLoading(false);
+            enqueueSnackbar(`Error loading Groups!`, {variant: 'error'});
+        });         
     },[]);
 
     return (        
@@ -60,7 +131,7 @@ const QuestionView = props => {
             <CssBaseline />
             <div className={classes.cardContent}>
                 <Grid container spacing={1}>
-                    <Grid item xs={12} md={12}>
+                    <Grid className={classes.gridContainer} item xs={12} md={12}>
                         <Card className={classes.card}>
                             <CardContent className={classes.cardContent}>
                                 <Typography variant="h5" component="h2">Add New Article / Question</Typography>
@@ -80,24 +151,16 @@ const QuestionView = props => {
                                             onBlur={handleChange()} />
                                     </Grid>
                                     <Grid item xs={12} md={4}>
-                                        <OutlinedDropDown label="Type"/>
+                                        {typeList && <OutlinedDropDown label="Type" options={typeList} onSelect={handleTypeSelect}/>}
                                     </Grid>
                                     <Grid item xs={12} md={4}>        
-                                        <OutlinedDropDown label="Category"/>
+                                        {groupList && <OutlinedDropDown label="Category" options={groupList} onSelect={handleGroupSelect}/>}
                                     </Grid>
                                     <Grid item xs={12} md={4}>
-                                        <OutlinedDropDown label="Tags"/>
+                                        {tagList && <OutlinedDropDown label="Tags" options={tagList} onSelect={handleTagSelect}/>}
                                     </Grid>
-                                    <Grid item xs={12} md={12}>
-                                        <TextField 
-                                            fullWidth 
-                                            margin="normal" 
-                                            required 
-                                            id="name" 
-                                            label="Enter Title" 
-                                            name="name" 
-                                            autoFocus
-                                            onBlur={handleChange()} />
+                                    <Grid className={classes.editTagContent} item xs={12} md={12}>
+                                        {cancelableBadges}
                                     </Grid>
                                 </Grid>
                             </CardContent>

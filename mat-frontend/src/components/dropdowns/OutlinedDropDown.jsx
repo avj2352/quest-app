@@ -20,7 +20,13 @@ const OutlinedDropDown  = props => {
     // event handlers
     function handleDropdown(event) {
         setValues({[event.target.name]: event.target.value});
+        props.onSelect(event.target.value);
+
     }
+    
+    const menuItemList = props.options.map((el, index) => {
+      return <MenuItem key={index} value={el.value}><em>{el.display}</em></MenuItem>
+    });
 
     // componentDidMount
     useEffect(()=>{        
@@ -40,12 +46,7 @@ const OutlinedDropDown  = props => {
           displayEmpty
           name="age"
           className={classes.selectEmpty}>
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {menuItemList}
         </Select>
       </FormControl>
         </React.Fragment>
@@ -53,7 +54,9 @@ const OutlinedDropDown  = props => {
 };
 
 OutlinedDropDown.propTypes = {
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+  onSelect: PropTypes.func.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(OutlinedDropDown);

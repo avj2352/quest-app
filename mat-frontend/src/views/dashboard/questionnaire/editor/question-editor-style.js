@@ -60,5 +60,10 @@ export const styles = theme => ({
       },
       validationText: {
         color: 'red'
+      },      
+      editTagContent: {
+        // border: '1px solid red',
+        display: 'flex',
+        justifyContent: 'flex-start'
       }
   });
