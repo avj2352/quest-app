@@ -20,6 +20,7 @@ import CircularLoader from './../../../../components/loaders/circular-loader/Cir
 import ArticleCard from './ArticleCard.jsx';
 import { getAllGroups, getAllTags } from './../../../../common/async-requests';
 import { AppContext } from './../../../../common/AppContext.jsx';
+import { createNewArticle } from './../../../../common/async-requests';
 
 
 const QuestionView = props => {
@@ -59,8 +60,8 @@ const QuestionView = props => {
         });
     }
 
-    const handleTypeSelect = (data) => {
-        console.log('Selected Type is: ', data);
+    const handleTypeSelect = (data) => {        
+        setQuestionType(data);
     }
 
     const handleGroupSelect = (data) => {
@@ -74,13 +75,42 @@ const QuestionView = props => {
         });
     }
 
+    const handleSubmit = () => {
+        setLoading(true);
+        console.log('Data to be submitted is: ', title, selectedGroupList, selectedTagList, questionType);
+        const postParam = {
+            title: title,
+            type: questionType,
+            question: '',
+            answer: '',
+            tags: selectedTagList,
+            groups: selectedGroupList
+        };
+
+        createNewArticle(postParam)
+        .then(res => {
+            setLoading(false);
+            enqueueSnackbar(`New Article Added !`, {variant: 'info'});
+            window.location.href = '#/app/admin?g=questions';
+        }, err => {
+            setLoading(false);
+            console.log('Error creating new Article: ', err);
+            enqueueSnackbar(`Error creating new Article!`, {variant: 'error'});
+        });
+    }
+
     // renders
     const cancelableBadges = (selectedTagList.length > 0) && selectedTagList.map((el, index) => {
         const tempList = tagList.filter(item => {
             return item.value === el;
         });
-        return <ActionableBadge key={index} id={el} name={tempList[0].display} description={tempList[0].display} onDelete={handleTagDelete}/>
-    })
+        return <ActionableBadge 
+            key={index} 
+            id={el} 
+            name={tempList[0].display} 
+            description={tempList[0].display} 
+            onDelete={handleTagDelete}/>
+    });
     
 
     // Question / Answer Card
@@ -102,7 +132,7 @@ const QuestionView = props => {
                 };
             });
             setTagList(dataOneList);
-            console.log('Tag List is: ', dataOneList);
+            // console.log('Tag List is: ', dataOneList);
             return allGroupPromise;
         }, err => {
             setLoading(false);
@@ -116,7 +146,7 @@ const QuestionView = props => {
                 };
             });
             setGroupList(dataTwoList);
-            console.log('Group List is: ', dataTwoList);
+            // console.log('Group List is: ', dataTwoList);
             enqueueSnackbar(`Dropdown options loaded successfully !`, {variant: 'success'});
             setLoading(false);
         }, err => {
@@ -166,8 +196,9 @@ const QuestionView = props => {
                             <CardActions className={classes.action}>
                                 <Button disabled={title === '' || selectedTagList.length === 0 || selectedGroupList.length === 0} 
                                         variant="contained" 
+                                        onClick={handleSubmit}
                                         size="medium" 
-                                        color="primary">Submit</Button>
+                                        color="primary" >Submit</Button>
                                 {/* <Button size="medium" color="primary">Cancel</Button> */}
                             </CardActions>
                         </Card>

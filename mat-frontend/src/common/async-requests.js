@@ -81,3 +81,15 @@ export const updateGroupById = (data) => {
 export const deleteGroupById = (id) => {
     return axios.delete(`/group/${id}`);
 };
+
+// QUESTION
+export const createNewArticle = (data) => {
+    return axios.post(`/question`, {
+        title: data.title,
+        type: data.type,
+        question: data.question,
+        answer: data.answer,
+        tags: data.tags,
+        groups: data.groups
+    });
+};
