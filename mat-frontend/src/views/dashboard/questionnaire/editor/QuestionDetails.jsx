@@ -77,7 +77,7 @@ const QuestionView = props => {
 
     const handleSubmit = () => {
         setLoading(true);
-        console.log('Data to be submitted is: ', title, selectedGroupList, selectedTagList, questionType);
+        // console.log('Data to be submitted is: ', title, selectedGroupList, selectedTagList, questionType);
         const postParam = {
             title: title,
             type: questionType,
