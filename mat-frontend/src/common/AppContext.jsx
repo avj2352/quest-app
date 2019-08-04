@@ -13,6 +13,8 @@ export class AppProvider extends Component {
             title:'Quest App',
             themePalette:'light',
             isHeaderSearch: true,
+            questionContent: '',
+            answerContent: '',
             toggleTheme:()=>{                
                 this.setState(prev=>({themePalette: prev.themePalette === 'light' ? 'dark' : 'light'}));
             },
@@ -29,7 +31,7 @@ export class AppProvider extends Component {
                 localStorage.removeItem(`quest-${name}`);
             },
             getLocalStorageItem:(name) => {
-                localStorage.getItem(`quest-${name}`);
+                return localStorage.getItem(`quest-${name}`);
             },
             addLocalStorageJSON: (name, data) => {
                 localStorage.setItem(`quest-${name}`, JSON.stringify(data));
@@ -37,6 +39,14 @@ export class AppProvider extends Component {
             getLocalStorageJSON: (name) => {
                 const data = localStorage.getItem(`quest-${name}`);
                 return JSON.parse(data);
+            },
+            setMarkdownContent: (type, data) => {
+                if (type === 'question') this.setState({questionContent: data});
+                else this.setState({answerContent: data});
+            },
+            getMarkdownContent: (type) => {
+                if (type === 'question') return this.questionContent;
+                else return this.answerContent;
             }
         };
     }
