@@ -120,7 +120,7 @@ const QuestionView = props => {
     </React.Fragment>;    
 
     // componentDidMount
-    useEffect(()=>{
+    useEffect(()=>{        
         setLoading(true);
         const allTagPromise = getAllTags();
         const allGroupPromise = getAllGroups();

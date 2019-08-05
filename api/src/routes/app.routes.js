@@ -9,6 +9,7 @@ import { QuestionsController } from './../controllers/questionnaire.controller';
 import { InventoryController } from './../controllers/inventory.controller';
 import { BasicAuthentication } from '../handlers/basic.auth';
 import { QueriesController } from './../handlers/queries';
+import { convertMarkdown } from './../helpers/index';
 
 const tag = new TagController();
 const group = new GroupController();
@@ -88,6 +89,10 @@ const routes = (app) => {
     // Simple Authentication =========
     app.route('/login')  
     .post(auth.authenticateUser);
+
+    // convert json to markdown
+    app.route('/convert')
+    .post(convertMarkdown);
 };
 
 

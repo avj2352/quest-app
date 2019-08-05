@@ -20,10 +20,12 @@ const MarkDownEditor = props => {
             case '#/app/editor?q=add&type=question':
                 console.log('Setting value for question', content);
                 appContext.addLocalStorageItem('question', content);
+                appContext.setMarkdownContent('question', content);
                 break;
             default:
                 console.log('Setting value for answer');
                 appContext.addLocalStorageItem('answer', content);
+                appContext.setMarkdownContent('answer', content);
         }
         window.location.href = `#/app/editor?q=add`;
     }
@@ -43,12 +45,12 @@ const MarkDownEditor = props => {
         console.log('Location object', window.location);
         switch(window.location.hash) {
             case '#/app/editor?q=add&type=question':
+                setContent(appContext.getLocalStorageItem('question'));
                 editorRef.current.value = appContext.getLocalStorageItem('question');
-                // console.log('Getting value from question', appContext.getLocalStorageItem('question'));
                 break;
             default:
-                // console.log('Getting value from answer');
-                setContent(appContext.getLocalStorageItem('answer'));                
+                setContent(appContext.getLocalStorageItem('answer'));
+                editorRef.current.value = appContext.getLocalStorageItem('answer');                
         }
         // Making editor width and height same as the container
         editorRef.current.style.width = `${containerRef.current.clientWidth}px`;

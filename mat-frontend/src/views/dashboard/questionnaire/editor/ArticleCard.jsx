@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // Materials
 import Grid from '@material-ui/core/Grid';
@@ -13,6 +13,7 @@ import FilterIcon from '@material-ui/icons/FilterList';
 // Custom
 import SimpleBadge from './../../../../components/badges/SimpleBadge.jsx';
 import CircularBadge from '../../../../components/badges/CircularBadge.jsx';
+import { AppContext } from '../../../../common/AppContext.jsx';
 
 const styles = theme => ({
     card: {
@@ -60,10 +61,48 @@ const styles = theme => ({
 
 const ArticleCard = props => {
     const { classes } = props;
+    // context
+    const appContext = useContext(AppContext);
+    // state
+    const [qLength, setQuestionLength] = useState(0);
+    const [aLength, setAnswerLength] = useState(0);
+    
+    // event handlers
+    const handleClear = () => {
+        if( props.title.toLowerCase() === 'question') {
+          appContext.removeLocalStorageItem('question');
+        } else {
+          appContext.removeLocalStorageItem('answer');
+        }
+        renderWordCount();
+    };
 
-    const filterUsingGroup = () => {
-        console.log('Filtering Questions on Group: ');
+    const handleSubmit = () => {
+      // Re-route to add new Question
+      window.location.href = `#/app/editor?q=add&type=${props.title.toLowerCase()}`;
     }
+
+    // wordCount - simple function
+    const wordCount = (data) => {
+      if (data === '') return 0;
+      else return data.split(' ').length;
+    };
+
+    const renderWordCount = () => {
+      console.log('App context qContent is: ', appContext.questionContent);
+      console.log('App context aContent is: ', appContext.answerContent);
+      const questionContent = appContext.getLocalStorageItem('question');
+      const answerContent = appContext.getLocalStorageItem('answer');
+      if (questionContent) setQuestionLength(wordCount(questionContent));
+      else setQuestionLength(0);
+      if (answerContent) setAnswerLength(wordCount(answerContent));
+      else setAnswerLength(0);
+    };
+
+    // componentDidMount
+    useEffect(()=>{
+      renderWordCount();
+    },[]);
 
     return (
         <Grid item xs={12} md={6}>
@@ -73,11 +112,12 @@ const ArticleCard = props => {
                       <Typography variant="h5" component="h2">{props.title}</Typography>                      
                     </div>
                     <Typography component="p" className={classes.pos} color="textSecondary">
-                        {`Click here to edit content for ${props.title.toLowerCase()}`}
+                        {`Word Count: ${props.title.toLowerCase() === 'question' ? qLength : aLength}`}
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.action}>
-                    <Button onClick={()=>window.location.href = `#/app/editor?q=add&type=${props.title.toLowerCase()}`}variant="contained" size="medium" color="primary">{`Fill in / Edit ${props.title}`}</Button>
+                    <Button onClick={handleSubmit} variant="contained" size="medium" color="primary">{`Fill in / Edit ${props.title}`}</Button>
+                    <Button onClick={handleClear} size="medium" color="primary">Clear</Button>
                 </CardActions>
             </Card>          
         </Grid>
