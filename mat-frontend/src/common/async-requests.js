@@ -93,3 +93,11 @@ export const createNewArticle = (data) => {
         groups: data.groups
     });
 };
+
+// RENDER MARKDOWN TO HTML
+
+export const postMarkdownRender = (data) => {
+    return axios.post(`/convert`, {
+        content: data
+    });
+}

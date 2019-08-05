@@ -23,6 +23,7 @@
 
 .container .preview-container {
     /* border: 1px solid green; */
+    font-size: 15px;
     width: 50%;
     margin: 0 5px;
     display: flex;    
@@ -30,10 +31,15 @@
 }
 
 .container .preview-container .content {
-    border-radius: 15px; 
-    background: white;
+    border-radius: 15px;     
     overflow-y: scroll;
+    text-align: left;
     height: 88vh;
+}
+
+.container .preview-container .content pre code {
+    border-radius: 5px;
+
 }
 
 .container .preview-container .actions {
