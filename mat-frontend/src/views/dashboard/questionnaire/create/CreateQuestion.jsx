@@ -10,7 +10,7 @@ import { useSnackbar } from 'notistack';
 import { styles } from './create-question-style.js';
 import CircularLoader from '../../../../components/loaders/circular-loader/CircularLoader.jsx';
 import ArticleCard from '../components/card/ArticleCard.jsx';
-import { createNewArticle } from '../../../../common/async-requests';
+import { createNewArticle, wordCount } from '../../../../common/async-requests';
 import { AppContext } from '../../../../common/AppContext.jsx';
 import QuestionForm from '../components/form/QuestionForm.jsx';
 import MarkDownEditor from './../components/editor/MarkDownEditor.jsx';
@@ -33,11 +33,7 @@ const CreateQuestion = props => {
     const { enqueueSnackbar} = useSnackbar();
     const { classes } = props;
 
-    // wordCount - simple function
-    const wordCount = (data) => {
-        if (!data || data === '') return 0;
-        else return data.split(' ').length;
-    };
+    
 
     // event handlers
     const handleSubmit = (action, data) => {

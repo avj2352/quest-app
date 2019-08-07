@@ -101,3 +101,11 @@ export const postMarkdownRender = (data) => {
         content: data
     });
 }
+
+// Get Word Count
+
+// wordCount - simple function
+export const wordCount = (data) => {
+    if (!data || data === '') return 0;
+    else return data.split(' ').length;
+};

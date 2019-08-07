@@ -10,9 +10,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import FilterIcon from '@material-ui/icons/FilterList';
-// Custom
-import SimpleBadge from '../../../../../components/badges/SimpleBadge.jsx';
-import CircularBadge from '../../../../../components/badges/CircularBadge.jsx';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { useSnackbar } from 'notistack';
 
 const styles = theme => ({
     card: {
@@ -58,12 +58,31 @@ const styles = theme => ({
     }
   });
 
-const QuestionGroupCard = props => {
+const QuestionFilterCard = props => {
     const { classes } = props;
+    const { enqueueSnackbar, closeSnackbar} = useSnackbar();
 
-    const filterUsingGroup = () => {
-        console.log('Filtering Questions on Group: ', props.id);
-        props.onFilter(props.title, props.list);
+    // add multiple actions to one snackbar
+    const action = (key) => (
+      <React.Fragment>
+          <Button onClick={() =>{ 
+            closeSnackbar(key);
+            props.onDelete(props.id);
+            }}>
+              {'Yes'}
+          </Button>
+          <Button onClick={() => { closeSnackbar(key); }}>
+              {'No'}
+          </Button>
+      </React.Fragment>
+    );
+
+    const handleEdit = () => {        
+        props.onEdit(props.id);
+    }
+
+    const handleDelete = () => {        
+      enqueueSnackbar(`Are you sure you want to delete this question / article ?`, {variant: 'warning', action});
     }
 
     return (
@@ -71,32 +90,30 @@ const QuestionGroupCard = props => {
             <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
                     <div className={classes.row}>
-                      <Typography variant="h5" component="h2">{props.title}</Typography>
-                      <CircularBadge count={props.count} />
+                      <Typography variant="h5" component="h2">{props.title}</Typography>                      
                     </div>
-                    <Typography className={classes.pos} component="p">
-                        {props.description}
-                    </Typography>     
+                    <Typography className={classes.pos} component="p">{props.type}</Typography>
                     
                 </CardContent>
                 <CardActions className={classes.action}>
-                  <Fab disabled={props.count === 0} className={classes.fab} size="small" color="primary" aria-label="Group" onClick={filterUsingGroup}>
-                    <FilterIcon/>
-                  </Fab>                  
+                  <Fab disabled={props.count === 0} className={classes.fab} size="small" color="primary" aria-label="Group" onClick={handleEdit}>
+                    <EditIcon/>
+                  </Fab>
+                  <Fab disabled={props.count === 0} className={classes.fab} size="small" aria-label="Group" onClick={handleDelete}>
+                    <DeleteIcon/>
+                  </Fab>
                 </CardActions>
             </Card>          
         </Grid>
     );
 }
 
-QuestionGroupCard.propTypes = {
-  title: PropTypes.string.isRequired,
+QuestionFilterCard.propTypes = {
   id: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  count: PropTypes.number.isRequired,
-  list: PropTypes.array,
-  onFilter: PropTypes.func.isRequired
+  title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,   
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
 }
 
-export default withStyles(styles, { withTheme: true })(QuestionGroupCard);
+export default withStyles(styles, { withTheme: true })(QuestionFilterCard);

@@ -59,7 +59,7 @@ export class QuestionsController {
 
     // Retrieve - questions by groupId
     getQuestionByGroupId (req, res) {
-        QuestionnaireModel.findOne({groups: req.params.groupId})
+        QuestionnaireModel.find({groups: req.params.groupId})
         .populate('tags')
         .populate('groups')
         .exec((err, data)=>{
