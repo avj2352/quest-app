@@ -7,9 +7,9 @@ import { withStyles } from '@material-ui/core/styles';
 import { useSnackbar } from 'notistack';
 // Custom
 import { styles } from './question-admin-style.js';
-import QuestionCreate from './QuestionCreate.jsx';
+import QuestionCreateCard from './components/card/QuestionCreateCard.jsx';
 import CircularLoader from './../../../components/loaders/circular-loader/CircularLoader.jsx';
-import QuestionGroupCard from './QuestionGroupCard.jsx';
+import QuestionGroupCard from './components/card/QuestionGroupCard';
 import { getAllGroupsWithQuestions } from './../../../common/async-requests';
 
 const QuestionView = props => {
@@ -43,7 +43,7 @@ const QuestionView = props => {
             <CssBaseline />
             <div className={classes.cardContent}>
                 <Grid container spacing={1}>
-                    <QuestionCreate/>
+                    <QuestionCreateCard/>
                     <Grid item xs={12} md={12} mt={5}>
                     <Typography component="p">Filter Questions based on Groups / Categories</Typography>
                         <CircularLoader display={isLoading}/>                       

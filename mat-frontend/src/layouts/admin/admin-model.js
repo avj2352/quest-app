@@ -3,8 +3,8 @@ import GroupView from '../../views/dashboard/groups/GroupView.jsx';
 import QuestionView from '../../views/dashboard/questionnaire/QuestionView.jsx';
 import TagView from '../../views/dashboard/tags/TagView.jsx';
 import NotFound from './../../views/dashboard/not-found/NotFound.jsx';
-import QuestionDetails from './../../views/dashboard/questionnaire/editor/QuestionDetails.jsx';
-import MarkdownEditor from './../../views/dashboard/questionnaire/editor/MarkDownEditor.jsx';
+import CreateQuestion from './../../views/dashboard/questionnaire/create/CreateQuestion.jsx';
+import UpdateQuestion from '../../views/dashboard/questionnaire/update/UpdateQuestion.jsx';
 
 export const routeMap = (path, search) => {
     if (path === '/app/admin') {
@@ -19,15 +19,12 @@ export const routeMap = (path, search) => {
                 return <NotFound/>;
         }
     } else if (path === '/app/editor') {
-        switch (search) {
-            case '?q=add':
-                return <QuestionDetails/>;
-            case '?q=add&type=question':
-                return <MarkdownEditor/>;
-            case '?q=add&type=answer':
-                return <MarkdownEditor/>;
-            default:
-                return <NotFound/>;
+        if(search.indexOf('?q=edit') > -1) {
+            return <UpdateQuestion/>;
+        } else if (search === '?q=add') {
+            return <CreateQuestion/>;
+        } else {
+            return <NotFound/>;    
         }
     } else {
         return <NotFound/>;

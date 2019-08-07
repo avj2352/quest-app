@@ -9,8 +9,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 // custom
-import LinearLoader from './../../../components/loaders/linear-loader/LinearLoader.jsx';
-import { createNewTag } from './../../../common/async-requests';
+import LinearLoader from '../../../../../components/loaders/linear-loader/LinearLoader.jsx';
+import { createNewTag } from '../../../../../common/async-requests';
 
 const useStyles = makeStyles({
   card: {
@@ -46,7 +46,7 @@ const useStyles = makeStyles({
   }
 });
 
-const QuestionCreate = (props) => {
+const QuestionCreateCard = (props) => {
   const classes = useStyles();  
 
   //state
@@ -91,4 +91,4 @@ const QuestionCreate = (props) => {
   );
 };
 
-export default QuestionCreate;
+export default QuestionCreateCard;

@@ -2,8 +2,8 @@ import React, { createRef, useState, useEffect, useContext } from 'react';
 import './markdown-editor.css';
 import Button from '@material-ui/core/Button';
 // custom
-import { AppContext } from './../../../../common/AppContext.jsx';
-import { postMarkdownRender } from './../../../../common/async-requests';
+import { AppContext } from './../../../../../common/AppContext.jsx';
+import { postMarkdownRender } from './../../../../../common/async-requests';
 
 const MarkDownEditor = props => {
     // context

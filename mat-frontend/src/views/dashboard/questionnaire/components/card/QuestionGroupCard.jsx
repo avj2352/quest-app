@@ -11,8 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import FilterIcon from '@material-ui/icons/FilterList';
 // Custom
-import SimpleBadge from './../../../components/badges/SimpleBadge.jsx';
-import CircularBadge from '../../../components/badges/CircularBadge.jsx';
+import SimpleBadge from '../../../../../components/badges/SimpleBadge.jsx';
+import CircularBadge from '../../../../../components/badges/CircularBadge.jsx';
 
 const styles = theme => ({
     card: {
