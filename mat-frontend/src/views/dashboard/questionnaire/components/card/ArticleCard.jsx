@@ -69,41 +69,19 @@ const ArticleCard = props => {
     
     // event handlers
     const handleClear = () => {
-        if( props.title.toLowerCase() === 'question') {
-          appContext.removeLocalStorageItem('question');
-        } else {
-          appContext.removeLocalStorageItem('answer');
-        }
-        renderWordCount();
+      props.onClear(props.title.toLowerCase());        
     };
 
     const handleSubmit = () => {
       // Re-route to add new Question
-      window.location.href = `#/app/editor?q=add&type=${props.title.toLowerCase()}`;
-    }
-
-    // wordCount - simple function
-    const wordCount = (data) => {
-      if (data === '') return 0;
-      else return data.split(' ').length;
+      if(props.title.toLowerCase() === 'question') {
+        props.onClick('question');
+      } else {
+        props.onClick('answer');
+      }
     };
 
-    const renderWordCount = () => {
-      console.log('App context qContent is: ', appContext.questionContent);
-      console.log('App context aContent is: ', appContext.answerContent);
-      const questionContent = appContext.getLocalStorageItem('question');
-      const answerContent = appContext.getLocalStorageItem('answer');
-      if (questionContent) setQuestionLength(wordCount(questionContent));
-      else setQuestionLength(0);
-      if (answerContent) setAnswerLength(wordCount(answerContent));
-      else setAnswerLength(0);
-    };
-
-    // componentDidMount
-    useEffect(()=>{
-      renderWordCount();
-    },[]);
-
+    
     return (
         <Grid item xs={12} md={6}>
             <Card className={classes.card}>
@@ -111,9 +89,7 @@ const ArticleCard = props => {
                     <div className={classes.row}>
                       <Typography variant="h5" component="h2">{props.title}</Typography>                      
                     </div>
-                    <Typography component="p" className={classes.pos} color="textSecondary">
-                        {`Word Count: ${props.title.toLowerCase() === 'question' ? qLength : aLength}`}
-                    </Typography>
+                    <Typography component="p" className={classes.pos} color="textSecondary">{`Word Count: ${props.length}`}</Typography>
                 </CardContent>
                 <CardActions className={classes.action}>
                     <Button onClick={handleSubmit} variant="contained" size="medium" color="primary">{`Fill in / Edit ${props.title}`}</Button>
@@ -125,8 +101,9 @@ const ArticleCard = props => {
 }
 
 ArticleCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired  
+  title: PropTypes.string.isRequired,  
+  onClick: PropTypes.func.isRequired,
+  length: PropTypes.number.isRequired
 }
 
 export default withStyles(styles, { withTheme: true })(ArticleCard);

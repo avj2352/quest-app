@@ -1,4 +1,6 @@
 import React, { createRef, useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 import './markdown-editor.css';
 import Button from '@material-ui/core/Button';
 // custom
@@ -17,19 +19,8 @@ const MarkDownEditor = props => {
     const [content, setContent] = useState('');
 
     // event handlers
-    const handleSubmit = () => {
-        switch(window.location.hash) {
-            case '#/app/editor?q=add&type=question':
-                console.log('Setting value for question', content);
-                appContext.addLocalStorageItem('question', content);
-                appContext.setMarkdownContent('question', content);
-                break;
-            default:
-                console.log('Setting value for answer');
-                appContext.addLocalStorageItem('answer', content);
-                appContext.setMarkdownContent('answer', content);
-        }
-        window.location.href = `#/app/editor?q=add`;
+    const handleSubmit = () => {        
+        props.onSubmit(content, false);
     }
 
     const handleOnChange = (evt) => {
@@ -58,35 +49,35 @@ const MarkDownEditor = props => {
     useEffect(()=>{
         // get context values
         console.log('Location object', window.location);
-        switch(window.location.hash) {
-            case '#/app/editor?q=add&type=question':
-                setContent(appContext.getLocalStorageItem('question'));
-                editorRef.current.value = appContext.getLocalStorageItem('question');
-                break;
-            default:
-                setContent(appContext.getLocalStorageItem('answer'));
-                editorRef.current.value = appContext.getLocalStorageItem('answer');                
-        }
-        // Making editor width and height same as the container
-        editorRef.current.style.width = `${containerRef.current.clientWidth}px`;
-        editorRef.current.style.height = `${containerRef.current.clientHeight}px`;
-    },[]);    
+        setContent(props.content);        
+        if (editorRef.current) editorRef.current.value = props.content;
+        if (editorRef.current) editorRef.current.style.width = `${containerRef.current.clientWidth}px`;
+        if (editorRef.current) editorRef.current.style.height = `${containerRef.current.clientHeight}px`;
+    },[props.display]);
 
-    return (
-        <div className="container">
-            <div className="editor-container" ref={containerRef}>
+    const editorContent = props.display && <React.Fragment>
+        <Grid item xs={12} md={12} className="container">
+            <Grid item xs={12} md={6} ref={containerRef} className="editor-container">
                 <textarea onBlur={handleOnChange} className="editor-form" ref={editorRef}></textarea>
-            </div>
-            <div className="preview-container">
+            </Grid>    
+            <Grid item xs={12} md={6} className="preview-container">
                 <div className="content" ref={renderHTMLRef}>
                 </div>
                 <div className="actions">
                     <Button onClick={handleRender} variant="contained" size="small" color="secondary">Render</Button>
                     <Button onClick={handleSubmit} variant="contained" size="small" color="primary">Submit</Button>
                 </div>
-            </div>
-        </div>
-    );
+            </Grid>
+        </Grid>
+    </React.Fragment>
+
+    return (editorContent);
+};
+
+MarkDownEditor.propTypes = {
+    display: PropTypes.bool.isRequired,
+    isQuestion: PropTypes.bool.isRequired,
+    onSubmit: PropTypes.func.isRequired
 };
 
 export default MarkDownEditor;

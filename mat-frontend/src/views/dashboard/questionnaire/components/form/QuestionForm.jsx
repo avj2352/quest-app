@@ -45,6 +45,7 @@ const QuestionForm = props => {
     };
 
     const handleGroupSelect = (data) => {
+        console.log('Selected group is: ', [data]);
         setSelectedGroupList([data]);
     };
 

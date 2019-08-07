@@ -13,6 +13,7 @@ import ArticleCard from '../components/card/ArticleCard.jsx';
 import { createNewArticle } from '../../../../common/async-requests';
 import { AppContext } from '../../../../common/AppContext.jsx';
 import QuestionForm from '../components/form/QuestionForm.jsx';
+import MarkDownEditor from './../components/editor/MarkDownEditor.jsx';
 
 
 const CreateQuestion = props => {
@@ -20,23 +21,38 @@ const CreateQuestion = props => {
     const appContext = useContext(AppContext);
     
     // states
-    const [isLoading, setLoading] = useState(false);                
+    const [isLoading, setLoading] = useState(false);
+    const [qContent, setQuestionContent] = useState('');
+    const [aContent, setAnswerContent] = useState('');
+    const [isQuestionEditor, setQuestionEditor] = useState(true);
+    const [isEditor, setEditor] = useState(false);
+    const [qLength, setQuestionLength] = useState(0);
+    const [aLength, setAnswerLength] = useState(0);
     
     // snackbar
     const { enqueueSnackbar} = useSnackbar();
     const { classes } = props;
 
+    // wordCount - simple function
+    const wordCount = (data) => {
+        if (!data || data === '') return 0;
+        else return data.split(' ').length;
+    };
+
+    // event handlers
     const handleSubmit = (action, data) => {
         setLoading(true);
         // console.log('Data to be submitted is: ', title, selectedGroupList, selectedTagList, questionType);
         const postParam = {
             title: data.title,
-            type: data.questionType,
-            question: '',
-            answer: '',
-            tags: data.selectedTagList,
-            groups: data.selectedGroupList
+            type: data.type,
+            question: qContent,
+            answer: aContent,
+            tags: data.tags,
+            groups: data.groups
         };
+
+        // console.log('Post parameters are: ', postParam);
 
         createNewArticle(postParam)
         .then(res => {
@@ -48,12 +64,48 @@ const CreateQuestion = props => {
             console.log('Error creating new Article: ', err);
             enqueueSnackbar(`Error creating new Article!`, {variant: 'error'});
         });
-    }
+    };
+
+    // event handlers
+    const handleArticleCardClick = (type) => {
+        if (type === 'question') {
+            setQuestionEditor(true);
+        } else {
+            setQuestionEditor(false);
+        }
+        setEditor(prev => !prev);
+    };
+
+    const handleArticleCardClear = (type) => {
+        if (type === 'question') {
+            setQuestionContent('');
+            setQuestionLength(0);
+            enqueueSnackbar(`Cleared Question content`, {variant: 'info'});
+        } else {
+            setAnswerContent('');
+            setAnswerLength(0);
+            enqueueSnackbar(`Cleared Answer content`, {variant: 'info'});
+        }
+    };
+
+    // event handler
+    const handleEditorSubmit = (content, state) => {
+        if (isQuestionEditor) {
+            enqueueSnackbar(`Updated Question content`, {variant: 'info'});
+            setQuestionContent(content);
+            setQuestionLength(wordCount(content));
+        } else {
+            enqueueSnackbar(`Updated Answer content`, {variant: 'info'});
+            setAnswerContent(content);
+            setAnswerLength(wordCount(content));
+        }
+        setEditor(state);
+    };
 
     // Question / Answer Card
-    const groupCardList = <React.Fragment>
-        <ArticleCard key={0} title='Question' slug={`/question`}/>
-        <ArticleCard key={1} title='Answer' slug={`/answer`}/>
+    const groupCardList = !isEditor && <React.Fragment>
+        <ArticleCard key={0} length={qLength} title='Question' onClick={handleArticleCardClick} onClear={handleArticleCardClear}/>
+        <ArticleCard key={1} length={aLength} title='Answer' onClick={handleArticleCardClick} onClear={handleArticleCardClear}/>
     </React.Fragment>;    
 
     return (        
@@ -62,12 +114,12 @@ const CreateQuestion = props => {
             <div className={classes.cardContent}>
                 <Grid container spacing={1}>
                     <QuestionForm 
-                        display={true} 
+                        display={!isEditor}
                         title={'Add New Question / Article'} 
-                        onSubmit={()=>console.log('Submitted')}/>                        
-
+                        onSubmit={handleSubmit}/>
                         { groupCardList }
                     <CircularLoader display={isLoading} />
+                    <MarkDownEditor content={ isQuestionEditor ? qContent: aContent } display={isEditor} isQuestion={isQuestionEditor} onSubmit={handleEditorSubmit}/>
                 </Grid>
             </div>
         </div>
