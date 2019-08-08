@@ -111,7 +111,8 @@ const CreateQuestion = props => {
                 <Grid container spacing={1}>
                     <QuestionForm 
                         display={!isEditor}
-                        title={'Add New Question / Article'} 
+                        title=''
+                        header={'Add New Question / Article'} 
                         onSubmit={handleSubmit}/>
                         { groupCardList }
                     <CircularLoader display={isLoading} />

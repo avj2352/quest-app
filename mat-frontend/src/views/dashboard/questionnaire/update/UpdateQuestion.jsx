@@ -10,10 +10,11 @@ import { useSnackbar } from 'notistack';
 import { styles } from './update-question-style.js';
 import CircularLoader from '../../../../components/loaders/circular-loader/CircularLoader.jsx';
 import ArticleCard from '../components/card/ArticleCard.jsx';
-import { createNewArticle, wordCount } from '../../../../common/async-requests';
+import { updateArticleRecordById, wordCount } from '../../../../common/async-requests';
 import { AppContext } from '../../../../common/AppContext.jsx';
 import QuestionForm from '../components/form/QuestionForm.jsx';
 import MarkDownEditor from './../components/editor/MarkDownEditor.jsx';
+import { getArticleDetailsById } from './../../../../common/async-requests';
 
 
 const UpdateQuestion = props => {
@@ -22,6 +23,8 @@ const UpdateQuestion = props => {
     
     // states
     const [isLoading, setLoading] = useState(false);
+    const [qID, setQuestionId] = useState(null);
+    const [details, setQuestionDetails] = useState(null);
     const [qContent, setQuestionContent] = useState('');
     const [aContent, setAnswerContent] = useState('');
     const [isQuestionEditor, setQuestionEditor] = useState(true);
@@ -38,7 +41,7 @@ const UpdateQuestion = props => {
     // event handlers
     const handleSubmit = (action, data) => {
         setLoading(true);
-        // console.log('Data to be submitted is: ', title, selectedGroupList, selectedTagList, questionType);
+        
         const postParam = {
             title: data.title,
             type: data.type,
@@ -48,17 +51,17 @@ const UpdateQuestion = props => {
             groups: data.groups
         };
 
-        // console.log('Post parameters are: ', postParam);
+        console.log('Update parameters are: ', postParam);
 
-        createNewArticle(postParam)
+        updateArticleRecordById(postParam, qID)
         .then(res => {
             setLoading(false);
-            enqueueSnackbar(`New Article Added !`, {variant: 'info'});
+            enqueueSnackbar(`Article updated !`, {variant: 'info'});
             window.location.href = '#/app/admin?g=questions';
         }, err => {
             setLoading(false);
-            console.log('Error creating new Article: ', err);
-            enqueueSnackbar(`Error creating new Article!`, {variant: 'error'});
+            console.log('Error updating Article: ', err);
+            enqueueSnackbar(`Error updating Article !`, {variant: 'error'});
         });
     };
 
@@ -98,6 +101,30 @@ const UpdateQuestion = props => {
         setEditor(state);
     };
 
+    // componentDidMount
+    useEffect(()=>{
+        setLoading(true);
+        const idPath = window.location.hash.indexOf('id=');
+        const pathLength = window.location.hash.length;
+        console.log('ID: ', window.location.hash.substring(idPath+3, pathLength));
+        const qID = window.location.hash.substring(idPath+3, pathLength);
+        setQuestionId(qID);
+        getArticleDetailsById(qID)
+        .then( res => {
+            setLoading(false);
+            console.log('Question details: ', res.data);
+            setQuestionDetails(res.data);
+            if (res.data.question && res.data.question !=='') {
+                setQuestionContent(res.data.question);
+                setQuestionLength(wordCount(res.data.question));
+            }
+            if (res.data.answer && res.data.answer !== '') {
+                setAnswerContent(res.data.answer);
+                setAnswerLength(wordCount(res.data.answer));
+            }
+        });
+    },[]);
+
     // Question / Answer Card
     const groupCardList = !isEditor && <React.Fragment>
         <ArticleCard key={0} length={qLength} title='Question' onClick={handleArticleCardClick} onClear={handleArticleCardClear}/>
@@ -109,10 +136,13 @@ const UpdateQuestion = props => {
             <CssBaseline />
             <div className={classes.cardContent}>
                 <Grid container spacing={1}>
-                    <QuestionForm 
+                    {details && <QuestionForm
+                        title={details.title ? details.title : ''}
+                        pType={details.type ? details.type : null}
+                        pGroups={details.groups ? details.groups[0].title : null}
                         display={!isEditor}
-                        title={'Update Question / Article'} 
-                        onSubmit={handleSubmit}/>
+                        header={'Update Question / Article'} 
+                        onSubmit={handleSubmit}/>}
                         { groupCardList }
                     <CircularLoader display={isLoading} />
                     <MarkDownEditor content={ isQuestionEditor ? qContent: aContent } display={isEditor} isQuestion={isQuestionEditor} onSubmit={handleEditorSubmit}/>

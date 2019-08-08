@@ -48,7 +48,7 @@ const MarkDownEditor = props => {
     // componentDidMount
     useEffect(()=>{
         // get context values
-        console.log('Location object', window.location);
+        // console.log('Location object', window.location);
         setContent(props.content);        
         if (editorRef.current) editorRef.current.value = props.content;
         if (editorRef.current) editorRef.current.style.width = `${containerRef.current.clientWidth}px`;

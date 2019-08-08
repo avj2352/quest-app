@@ -94,6 +94,22 @@ export const createNewArticle = (data) => {
     });
 };
 
+// update
+export const updateArticleRecordById = (data, id) => {
+    return axios.put(`/question/${id}`, {
+        title: data.title,
+        type: data.type,
+        question: data.question,
+        answer: data.answer,
+        tags: data.tags,
+        groups: data.groups
+    });
+};
+
+export const getArticleDetailsById = (id) => {
+    return axios.get(`/question/${id}`);
+}
+
 // RENDER MARKDOWN TO HTML
 
 export const postMarkdownRender = (data) => {

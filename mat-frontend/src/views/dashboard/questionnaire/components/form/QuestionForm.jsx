@@ -24,8 +24,8 @@ const QuestionForm = props => {
     const [title, setTitle] = useState(props.title);
     const [isLoading, setLoading] = useState(false);
     const [typeList, setTypeList] = useState([{display: 'Question', value: 'question'}, {display: 'Article', value: 'article'}]);
-    const [selectedGroupList, setSelectedGroupList] = useState(null);
     const [questionType, setQuestionType] = useState(null);
+    const [selectedGroupList, setSelectedGroupList] = useState([]);
     const [selectedTagList, setSelectedTagList] = useState([]);
     const [errorMsg, setErrMsg] = useState(null);
 
@@ -131,7 +131,7 @@ const QuestionForm = props => {
         <Grid className={classes.gridContainer} item xs={12} md={12}>
                     <Card className={classes.card}>
                         <CardContent className={classes.cardContent}>
-                            <Typography variant="h5" component="h2">{props.title}</Typography>
+                            <Typography variant="h5" component="h2">{props.header}</Typography>
                             <Typography component="p" className={classes.pos} color="textSecondary">
                                 Please fill in all the details below:
                             </Typography>
@@ -143,7 +143,8 @@ const QuestionForm = props => {
                                         required 
                                         id="name" 
                                         label="Enter Title" 
-                                        name="name" 
+                                        name="name"
+                                        defaultValue={props.title}
                                         autoFocus
                                         onBlur={handleChange()} />
                                 </Grid>
@@ -177,6 +178,7 @@ const QuestionForm = props => {
 
 QuestionForm.propTypes = {    
     display: PropTypes.bool.isRequired,
+    header: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,    
 };
