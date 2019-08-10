@@ -106,6 +106,11 @@ export const updateArticleRecordById = (data, id) => {
     });
 };
 
+// delete
+export const deleteArticleRecordById = (id) => {
+    return axios.delete(`/question/${id}`);
+}
+
 export const getArticleDetailsById = (id) => {
     return axios.get(`/question/${id}`);
 }

@@ -5,8 +5,10 @@ import TagView from '../../views/dashboard/tags/TagView.jsx';
 import NotFound from './../../views/dashboard/not-found/NotFound.jsx';
 import CreateQuestion from './../../views/dashboard/questionnaire/create/CreateQuestion.jsx';
 import UpdateQuestion from '../../views/dashboard/questionnaire/update/UpdateQuestion.jsx';
+import CardListView from './../../views/main/CardListView.jsx';
 
 export const routeMap = (path, search) => {
+    console.log('Path and search are: ', path, search);
     if (path === '/app/admin') {
         switch (search) {
             case '?g=questions':
@@ -27,7 +29,7 @@ export const routeMap = (path, search) => {
             return <NotFound/>;    
         }
     } else {
-        return <NotFound/>;
+        return <CardListView/>;
     }
 }
 

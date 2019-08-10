@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 // custom
 import { AppContext } from './../../../../../common/AppContext.jsx';
 import { postMarkdownRender } from './../../../../../common/async-requests';
+import { isParenthesisMatching } from './../../../../../common/bracket-matching';
+
 
 const MarkDownEditor = props => {
     // context
@@ -17,6 +19,22 @@ const MarkDownEditor = props => {
 
     // state
     const [content, setContent] = useState('');
+
+    // match brackets
+    // const matchBrackets = () => {
+    //     if(editorRef.current.value && editorRef.current.value.length > 0) {            
+    //         const data = isParenthesisMatching(editorRef.current.value[editorRef.current.value.length-1]);
+    //         if (!data.status && data.char ) {                
+    //             data.char.map(el => {
+    //                 if (el === '(') {
+    //                     editorRef.current.value = `${editorRef.current.value})`;
+    //                 } else if (el === '{') {
+    //                     editorRef.current.value = `${editorRef.current.value}}`;
+    //                 }
+    //             });
+    //         }
+    //     }        
+    // };
 
     // event handlers
     const handleSubmit = () => {        

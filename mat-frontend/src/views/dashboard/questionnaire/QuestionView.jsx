@@ -11,7 +11,7 @@ import QuestionCreateCard from './components/card/QuestionCreateCard.jsx';
 import CircularLoader from './../../../components/loaders/circular-loader/CircularLoader.jsx';
 import QuestionGroupCard from './components/card/QuestionGroupCard';
 import QuestionFilterCard from './components/card/QuestionFilterCard';
-import { getAllGroupsWithQuestions } from './../../../common/async-requests';
+import { getAllGroupsWithQuestions, deleteArticleRecordById } from './../../../common/async-requests';
 
 const QuestionView = props => {
     // states
@@ -36,6 +36,16 @@ const QuestionView = props => {
     // event handlers
     const handleQuestionDelete = (id) => {
         console.log('Deleting Question details: ', id);
+        deleteArticleRecordById(id)
+        .then ( res => {
+            enqueueSnackbar(`Record successfully deleted`, {variant: 'info'});
+            window.location.href=`#/app/admin?g=questions`;
+            toggleQuestionGroupList(false);
+        })
+        .catch ( err => {
+            console.log('Error deleting record!', err);
+            enqueueSnackbar(`Error deleting record`, {variant: 'error'});
+        })
     }
 
     const { classes } = props;
