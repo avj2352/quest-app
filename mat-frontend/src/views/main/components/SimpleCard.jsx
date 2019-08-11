@@ -91,7 +91,7 @@ const SimpleCard = props => {
                     {/* <SimpleBadge name={props.name} description={props.description} /> */}
                 </CardContent>
                 <CardActions className={classes.action}>
-                <Button onClick={handleClick} size="medium" color="primary">Details</Button>                
+                <Button onClick={handleClick} size="medium" color="primary">Read...</Button>                
                 </CardActions>
             </Card>          
         </Grid>
