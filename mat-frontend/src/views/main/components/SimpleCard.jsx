@@ -14,6 +14,7 @@ import Fab from '@material-ui/core/Fab';
 import { useSnackbar } from 'notistack';
 // Custom
 import SimpleBadge from '../../../components/badges/SimpleBadge.jsx';
+import { showIcon } from './../../../components/sidebar/sidebar-icons';
 
 const styles = theme => ({
     card: {
@@ -31,6 +32,16 @@ const styles = theme => ({
       display: 'inline-block',
       margin: '0 2px',
       transform: 'scale(0.8)',
+    },
+    titleRow: {
+      display: 'flex'
+    },
+    titleIcon: {
+      // border: '1px solid red',
+      marginTop: '3px',
+      color: 'orange',
+      paddingRight: '10px',      
+      position: 'relative',      
     },
     title: {
       fontSize: 14,
@@ -61,13 +72,19 @@ const SimpleCard = props => {
     const handleClick = () => {
       props.onClick({id: props.id });
     };
+    
+    // render icon
+    const icon = props.slug ? <div className={classes.titleIcon}>{showIcon(props.slug)}</div> : <React.Fragment></React.Fragment>;
 
     // renders
     return (
         <Grid item xs={12} md={4}>
             <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
-                    <Typography variant="h5" component="h2">{props.title}</Typography>
+                    <div className={classes.titleRow}>
+                      { icon }
+                      <Typography variant="h5" component="h2">{props.title}</Typography>
+                    </div>
                     <Typography className={classes.pos} component="p">
                         {`${props.content.substring(0,50)}....`}
                     </Typography>

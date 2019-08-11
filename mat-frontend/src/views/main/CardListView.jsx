@@ -60,6 +60,7 @@ const CardListView = props => {
 
     const refreshCardList = () => {
         let filteredQuestionList;
+        let count;
         setLoading(true);
         let allGroupQuestionPromise = getAllGroupsWithQuestions();
         let allTagPromise = getAllTags();
@@ -68,6 +69,7 @@ const CardListView = props => {
             // console.log('Loaded group list', res.data);
             setMainList(res.data);
             filteredQuestionList = filterQuestionList(res.data);
+            count = filteredQuestionList.length;
             setQuestionList(filteredQuestionList);
             return allTagPromise;            
         }, err => {
@@ -78,7 +80,7 @@ const CardListView = props => {
             // console.log('Loaded tag list', res2.data);
             setTagList(res2.data);
             setLoading(false);
-            enqueueSnackbar(`Questions Loaded...`, {variant: 'success'});
+            enqueueSnackbar(`${count} Questions Loaded...`, {variant: 'info'});
         }, err => {
             setLoading(false);
             console.log('Error loading tags', err);
