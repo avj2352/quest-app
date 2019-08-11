@@ -8,7 +8,7 @@ import UpdateQuestion from '../../views/dashboard/questionnaire/update/UpdateQue
 import CardListView from './../../views/main/CardListView.jsx';
 
 export const routeMap = (path, search) => {
-    console.log('Path and search are: ', path, search);
+    // console.log('Path and search are: ', path, search);
     if (path === '/app/admin') {
         switch (search) {
             case '?g=questions':

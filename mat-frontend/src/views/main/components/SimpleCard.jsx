@@ -57,47 +57,24 @@ const SimpleCard = props => {
     const { classes } = props;
     const { enqueueSnackbar, closeSnackbar} = useSnackbar();
 
-    //snackbar with prompt
-    // add multiple actions to one snackbar
-    const action = (key) => (
-      <React.Fragment>
-          <Button onClick={() =>{ 
-            closeSnackbar(key);
-            props.onDelete({id: props.id, name: props.name, description: props.description}); 
-            }}>
-              {'Yes'}
-          </Button>
-          <Button onClick={() => { closeSnackbar(key); }}>
-              {'No'}
-          </Button>
-      </React.Fragment>
-    );
-
-    const editTag = () => {
-      props.onEdit({id: props.id, name: props.name, description: props.description});
+    // event handlers
+    const handleClick = () => {
+      props.onClick({id: props.id });
     };
 
-    const deleteTag = () => {
-      enqueueSnackbar(`Are you sure you want to delete this tag?`, {variant: 'warning', action});
-    }
-
+    // renders
     return (
         <Grid item xs={12} md={4}>
             <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
-                    <Typography variant="h5" component="h2">{props.name}</Typography>
+                    <Typography variant="h5" component="h2">{props.title}</Typography>
                     <Typography className={classes.pos} component="p">
-                        {props.description}
+                        {`${props.content.substring(0,50)}....`}
                     </Typography>
-                    <SimpleBadge name={props.name} description={props.description} />
+                    {/* <SimpleBadge name={props.name} description={props.description} /> */}
                 </CardContent>
                 <CardActions className={classes.action}>
-                  <Fab className={classes.fab} size="small" color="primary" aria-label="Update" onClick={editTag}>
-                    <EditIcon/>
-                  </Fab>
-                  <Fab className={classes.fab} size="small" aria-label="Delete" onClick={deleteTag}>
-                    <DeleteIcon/>
-                  </Fab>                    
+                <Button onClick={handleClick} size="medium" color="primary">Details</Button>                
                 </CardActions>
             </Card>          
         </Grid>
@@ -106,10 +83,12 @@ const SimpleCard = props => {
 
 SimpleCard.propTypes = {
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired,
-    description: PropTypes.string.isRequired
+    slug: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    tagList: PropTypes.array,
+    selectedTags: PropTypes.array,
+    content: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired    
 };
 
 export default withStyles(styles, { withTheme: true })(SimpleCard);;

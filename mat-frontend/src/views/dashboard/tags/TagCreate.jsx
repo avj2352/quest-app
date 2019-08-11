@@ -119,7 +119,7 @@ const TagCreate = (props) => {
             onBlur={handleChange()}/>
       </CardContent>
       <CardActions className={classes.action}>
-        <Button onClick={handleSubmit} disabled={!!errMsg} variant="contained" size="medium" color="primary">Create Tag</Button>        
+        <Button onClick={handleSubmit} disabled={!!errMsg} variant="contained" size="medium" color="primary">Create Tag</Button>
       </CardActions>
     </Card>
     </Grid>
