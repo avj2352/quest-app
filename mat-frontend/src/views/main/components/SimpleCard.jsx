@@ -39,7 +39,7 @@ const styles = theme => ({
     titleIcon: {
       // border: '1px solid red',
       marginTop: '3px',
-      color: 'orange',
+      color: '#00ffff',
       paddingRight: '10px',      
       position: 'relative',      
     },
