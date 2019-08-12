@@ -7,6 +7,7 @@ import CreateQuestion from './../../views/dashboard/questionnaire/create/CreateQ
 import UpdateQuestion from '../../views/dashboard/questionnaire/update/UpdateQuestion.jsx';
 import CardListView from './../../views/main/CardListView.jsx';
 
+
 export const routeMap = (path, search) => {
     // console.log('Path and search are: ', path, search);
     if (path === '/app/admin') {

@@ -9,8 +9,9 @@ import { useSnackbar } from 'notistack';
 // Custom
 import TagCard from './../dashboard/tags/TagCard.jsx';
 import CircularLoader from './../../components/loaders/circular-loader/CircularLoader.jsx';
-import { getAllGroupsWithQuestions, getAllTags } from './../../common/async-requests';
+import { getAllGroupsWithQuestions, getAllTags, postMarkdownRender } from './../../common/async-requests';
 import SimpleCard from './components/SimpleCard.jsx';
+import DetailCard from './components/DetailCard.jsx';
 
 // CSS
 import { styles } from './card-view-style';
@@ -19,10 +20,14 @@ const CardListView = props => {
     
     
     const [isLoading, setLoading] = useState(false);
-    const [list, setMainList] = useState(null);
-    const [tagList, setTagList] = useState(null);
+    const [list, setMainList] = useState(null);    
+    const [qContent, setQuestionContent] = useState(null);
+    const [aContent, setAnswerContent] = useState(null);
+    const [cardDetails, setCardDetails] = useState(null);        
+    const [tagList, setTagList] = useState(null);    
     const [groupList, setGroupList] = useState(null);
     const [questionList, setQuestionList] = useState(null);
+    const [isQuestionDetails, toggleQuestionDetail] = useState(false);
     //snackBar
     const { enqueueSnackbar} = useSnackbar();
     // styles
@@ -33,27 +38,45 @@ const CardListView = props => {
         return list;
     };
 
-    const handleCardClick = () => {
-        console.log('Card was clicked');
+    const handleBackButtonClick = (status) => {
+        toggleQuestionDetail(status);
+    };
+
+    const handleCardClick = (data) => {
+        setLoading(true);
+        console.log('Card was clicked: ', data);
+        // render both q&a as html using Promise.all
+        const renderQuestionPromise = postMarkdownRender(data.qContent);
+        const renderAnswerPromise = postMarkdownRender(data.aContent);        
+        Promise.all([renderQuestionPromise, renderAnswerPromise])
+        .then(res => {
+            setCardDetails(data);
+            console.log('Render contents are: ', res);
+            setQuestionContent(res[0].data.markdown);
+            setAnswerContent(res[1].data.markdown);
+            toggleQuestionDetail(prev => !prev);
+            setLoading(false);
+        })
     };
 
     // filter questions from groups
     const filterQuestionList = (list) => {
         const result = [];
-        const fList = list.map(el => {
+        list.map(el => {
              el.questions.length > 0 && el.questions.map(temp => {
                 const item = {                    
                     id: temp._id,
                     title: temp.title,
                     groupId: el._id,
-                    content: temp.question,
+                    qContent: temp.question,
+                    aContent: temp.answer,
                     slug: el.slug,
                     tagList: temp.tags
                 };
                 result.push(item);
             });
         });
-        console.log('question list is: ', result);
+        // console.log('question list is: ', result);
         return result;
     };
 
@@ -95,6 +118,7 @@ const CardListView = props => {
         
     // componentDidUpdate
     useEffect(()=>{
+        toggleQuestionDetail(false);
         if (list && list.length > 0){
             const filteredList = filterGroupList(list, window.location.hash);
             setGroupList(filteredList);
@@ -108,14 +132,26 @@ const CardListView = props => {
         return <SimpleCard
                 key={index}
                 id={item.id}
+                groupId = {item.groupId}
                 slug={item.slug}
                 title={item.title}
                 tagList={tagList}
-                selectedTags={item.tags}
-                content={item.content}
+                selectedTags={item.tagList}
+                qContent={item.qContent}
+                aContent={item.aContent}
                 onClick={handleCardClick}/>
     });
 
+    // render cardDetailComponent
+    const showCardDetails = isQuestionDetails && cardDetails && <DetailCard
+                            id={cardDetails.id}
+                            title={cardDetails.title}
+                            groupId={cardDetails.groupId}
+                            slug={cardDetails.slug}
+                            selectedTags={cardDetails.selectedTags}
+                            qContent = {qContent}
+                            aContent = {aContent}
+                            onBack = {handleBackButtonClick}/>;
     //render
     return (
         <div className={classes.root}>            
@@ -125,7 +161,8 @@ const CardListView = props => {
                     <Grid item xs={12} md={12}>
                         <CircularLoader display={isLoading}/>                    
                     </Grid>
-                    {simpleCardList}
+                    {!isQuestionDetails && simpleCardList}
+                    {showCardDetails}
                 </Grid>
             </div>            
         </div>

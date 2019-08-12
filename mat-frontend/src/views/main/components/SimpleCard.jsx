@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 // Material
 import { withStyles } from '@material-ui/core/styles';
@@ -34,10 +34,14 @@ const styles = theme => ({
       transform: 'scale(0.8)',
     },
     titleRow: {
-      display: 'flex'
+      // border: '1px solid red',      
+      display: 'flex',
+      width: '100%',
     },
-    titleIcon: {
-      // border: '1px solid red',
+    badgeContainer: {
+      display:'block',
+    },
+    titleIcon: {      
       marginTop: '3px',
       color: '#00ffff',
       paddingRight: '10px',      
@@ -65,16 +69,54 @@ const styles = theme => ({
   });
 
 const SimpleCard = props => {
+    // state
+    const [tagList, setTagList] = useState(null);
+
     const { classes } = props;
     const { enqueueSnackbar, closeSnackbar} = useSnackbar();
 
     // event handlers
     const handleClick = () => {
-      props.onClick({id: props.id });
+      props.onClick({
+        id: props.id,
+        title: props.title,
+        groupId: props.groupId,
+        slug: props.slug,
+        selectedTags: tagList,
+        qContent: props.qContent,
+        aContent: props.aContent,
+      });
     };
+
+    const renderTagComponents = (list) => {
+      let result = [];
+      // console.log('Selected tags:', list);
+      if (list && list.length > 0) {
+        list.map (item => {
+          const temp = props.tagList.filter(val => {
+            return val._id === item;
+          });
+          result.push(temp[0]);
+        });
+        // console.log('Tags to be rendered: ', result);
+        setTagList(result);
+      }
+    }
+
+    // render tags
+    // const tagComponents = renderTagComponents(props.selectedTags);
     
     // render icon
     const icon = props.slug ? <div className={classes.titleIcon}>{showIcon(props.slug)}</div> : <React.Fragment></React.Fragment>;
+
+    // render badges
+    const badgeIcons = tagList && tagList.map((item, index) => {
+        return <SimpleBadge key={index} name={item.name} description={item.description} />
+    });
+
+    useEffect(()=>{
+      renderTagComponents(props.selectedTags);
+    },[]);
 
     // renders
     return (
@@ -85,10 +127,12 @@ const SimpleCard = props => {
                       { icon }
                       <Typography variant="h5" component="h2">{props.title}</Typography>
                     </div>
-                    <Typography className={classes.pos} component="p">
-                        {`${props.content.substring(0,50)}....`}
+                    <Typography className={classes.pos} color="textSecondary" component="p">
+                        {`${props.qContent.substring(0,50)}....`}
                     </Typography>
-                    {/* <SimpleBadge name={props.name} description={props.description} /> */}
+                    <div className={classes.badgeContainer}>
+                      {badgeIcons}
+                    </div>
                 </CardContent>
                 <CardActions className={classes.action}>
                 <Button onClick={handleClick} size="medium" color="primary">Read...</Button>                
@@ -100,11 +144,13 @@ const SimpleCard = props => {
 
 SimpleCard.propTypes = {
     id: PropTypes.string.isRequired,
+    groupId: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    tagList: PropTypes.array,
+    tagList: PropTypes.array.isRequired,
     selectedTags: PropTypes.array,
-    content: PropTypes.string.isRequired,
+    qContent: PropTypes.string.isRequired,
+    aContent: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired    
 };
 
