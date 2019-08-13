@@ -4,7 +4,7 @@ import { setupDBConnection } from './src/config/db-connect';
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 5000;
-const DB_ENV = 'DEV';
+const DB_ENV = 'PROD';
 const path = require('path');
 setupDBConnection(DB_ENV);
 

@@ -11,13 +11,13 @@ export const InventorySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'users'
     },
-    group: {
-        type: Schema.Types.ObjectId,
-        ref: 'group'
+    description: {
+        type: String,
+        required: 'Description of your timer is required'
     },
-    question: {
-        type: Schema.Types.ObjectId,
-        ref: 'questions'
+    date: {
+        type: String,
+        required: 'Date is required'
     }    
 });
 

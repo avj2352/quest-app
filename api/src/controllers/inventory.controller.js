@@ -11,6 +11,7 @@ export class InventoryController {
             // Query Question
             newRecord = new InventoryModel({
                 user: req.params.userId,
+                group: req.params.groupId,
                 question: req.params.questionId
             });
         } catch (err) {
@@ -28,6 +29,7 @@ export class InventoryController {
         try {
             InventoryModel.deleteOne({
                 user: req.params.userId,
+                group: req.params.groupId,
                 question: req.params.questionId
             }, (err)=>{
                 if (err) res.send(err);
