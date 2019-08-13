@@ -92,7 +92,7 @@ const Sidebar = props => {
       })}
     </React.Fragment> : <React.Fragment></React.Fragment>;
 
-    const premiumListItem = (userDetails && userDetails.premium) ? <React.Fragment>
+    const premiumListItem = (userDetails && userDetails.role === 'admin') ? <React.Fragment>
           <ListItem button onClick={()=> {window.location.href = '#/app/admin?g=questions'}}>
             <ListItemIcon>
             {showIcon('questions')}

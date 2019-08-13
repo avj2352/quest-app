@@ -42,7 +42,7 @@ export class QueriesController {
         if(email && email !=='') {
             this.user.fetchUserByEmail(email)
             .then(data => {
-                if(!data.premium) {
+                if(data.role === 'normal') {
                     this.group.filterGroupsWithoutPremium(req, res);
                 } else {
                     this.group.getAllGroups(req, res);

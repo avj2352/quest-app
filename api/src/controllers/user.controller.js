@@ -15,7 +15,7 @@ export class UserController {
             provider: req.body.provider,
             password: bcrypt.hashSync(req.body.password, saltRounds),
             email: req.body.email,
-            premium: req.body.premium
+            role: req.body.role
         });              
        } catch (err) {
         res.send(err);
@@ -37,7 +37,7 @@ export class UserController {
             provider: data.provider,
             password: data.password,
             email: data.email,
-            premium: data.premium
+            role: data.role
         });
        } catch (err) {
         console.log('Error while populating data: ', err);
@@ -96,7 +96,7 @@ export class UserController {
                 provider: req.body.provider,
                 password: bcrypt.hashSync(req.body.password, saltRounds),
                 email: req.body.email,
-                premium: req.body.premium
+                role: req.body.role
             }, {new: true}, (err, data)=>{
                 if (err) res.send(err);
                 else res.json(data);

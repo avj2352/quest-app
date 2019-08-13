@@ -21,8 +21,8 @@ export const UserSchema = new Schema({
         type: String,
         required: 'Enter Email ID'
     },            
-    premium: {
-        type: Boolean,
+    role: {
+        type: String,
         required: 'Is User a premium or free tier user'
     }
 });

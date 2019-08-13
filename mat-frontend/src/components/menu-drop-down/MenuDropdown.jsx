@@ -132,7 +132,7 @@ const MenuDropDown = props => {
                 <ListItemIcon>
                     <StarIcon />
                 </ListItemIcon>
-                <ListItemText primary={`Premium: ${userDetails.premium}`} />
+                <ListItemText primary={`Role: ${userDetails.role}`} />
             </StyledMenuItem>
             <StyledMenuItem onClick = {logout}>
                 <ListItemIcon>
