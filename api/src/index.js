@@ -1,5 +1,5 @@
-import routes from './src/routes/app.routes';
-import { setupDBConnection } from './src/config/db-connect';
+import routes from './routes/app.routes';
+import { setupDBConnection } from './config/db-connect';
 
 const express = require('express');
 const app = express();

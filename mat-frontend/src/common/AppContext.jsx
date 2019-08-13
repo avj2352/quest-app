@@ -9,7 +9,7 @@ export class AppProvider extends Component {
     constructor() {
         super();
         this.state = {            
-            version:'3.0.1',
+            version:'3.0.1',            
             title:'Quest App',
             themePalette:'light',
             isHeaderSearch: true,
