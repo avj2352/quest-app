@@ -172,6 +172,53 @@
 			"response": []
 		},
 		{
+			"name": "Group - Get all Groups With Questions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/groupWithQuestions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"groupWithQuestions"
+					]
+				},
+				"description": "Get All Group records with their respective question fields"
+			},
+			"response": []
+		},
+		{
+			"name": "Group - Filter groups based on email ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "email",
+						"value": "avj2352@gmail.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/filtered/group",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"filtered",
+						"group"
+					]
+				},
+				"description": "Filter records based on the header parameter - email"
+			},
+			"response": []
+		},
+		{
 			"name": "Group - Get group by id",
 			"request": {
 				"method": "GET",
@@ -396,7 +443,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Simple Article\",\r\n    \"type\": \"article\",\r\n    \"question\": \"#This is a test Note\",\r\n    \"answer\": \"\",    \r\n    \"tags\": [\"5d259c74a1b4a103b4608a12\"],\r\n    \"groups\": [\"5d24be4921c73a2b0ccece33\"]\r\n}"
+					"raw": "{\r\n    \"title\": \"Simple Article\",\r\n    \"type\": \"article\",\r\n    \"question\": \"\",\r\n    \"answer\": \"\",\r\n    \"tags\": [\"5d259c74a1b4a103b4608a12\"],\r\n    \"groups\": [\"5d24be4921c73a2b0ccece33\"]\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:5000/question",
@@ -462,7 +509,7 @@
 					"raw": "{\r\n    \"title\": \"Simple Question\",\r\n    \"type\": \"qa\",\r\n    \"question\": \"#this is a sample question markdown\",\r\n    \"answer\": \"Simple answer\",    \r\n    \"tags\": [\"5d259c74a1b4a103b4608a12\"],\r\n    \"groups\": [\"5d24be4921c73a2b0ccece33\"]\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:5000/question/5d25d226ec477f32102ceade",
+					"raw": "http://localhost:5000/question/5d25e3d2e430f64de0a8cf87",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -470,7 +517,7 @@
 					"port": "5000",
 					"path": [
 						"question",
-						"5d25d226ec477f32102ceade"
+						"5d25e3d2e430f64de0a8cf87"
 					]
 				},
 				"description": "Delete an existing record"
@@ -554,15 +601,16 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"Pramod Jingade\",\n\t\"password\": \"test123\",\n\t\"email\": \"pramod.jingade@gmail.com\",\n\t\"provider\": \"app\",\n\t\"premium\": true\n}"
+					"raw": "{\n\t\"name\": \"Ananth Shayana\",\n\t\"password\": \"admin123\",\n\t\"email\": \"divine3d@gmail.com\",\n\t\"provider\": \"app\",\n\t\"role\": \"admin\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:5000/user",
-					"protocol": "http",
+					"raw": "https://quest-tech.herokuapp.com/user",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"quest-tech",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"user"
 					]
@@ -581,11 +629,16 @@
 						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "email",
+						"value": "avj2352@gmail.com",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"pramod.jingade@gmail.com\",\n\t\"password\": \"zuko2352\"\n}"
+					"raw": "{\n\t\"email\": \"avj2352@gmail.com\",\n\t\"password\": \"zuko2352\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:5000/login",
@@ -616,10 +669,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"Pramod Jingade\",\n\t\"password\": \"test123\",\n\t\"email\": \"pramod.jingade@gmail.com\",\n\t\"premium\": true\n}"
+					"raw": "{\n\t\"name\": \"Pramod AJ\",\n\t\"password\": \"zuko2352\",\n\t\"email\": \"avj2352@gmail.com\",\n\t\"premium\": false,\n\t\"provider\": \"app\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:5000/user/5d25fcb95b2ef420883559b9",
+					"raw": "http://localhost:5000/user/5d2fc80438432b4db498b906",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -627,7 +680,7 @@
 					"port": "5000",
 					"path": [
 						"user",
-						"5d25fcb95b2ef420883559b9"
+						"5d2fc80438432b4db498b906"
 					]
 				},
 				"description": "Update User record by ID"
@@ -651,7 +704,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:5000/user/5d25fcb95b2ef420883559b9",
+					"raw": "http://localhost:5000/user/5d2fc80438432b4db498b906",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -659,10 +712,41 @@
 					"port": "5000",
 					"path": [
 						"user",
-						"5d25fcb95b2ef420883559b9"
+						"5d2fc80438432b4db498b906"
 					]
 				},
 				"description": "Delete a record by ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Convert Markdown",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content\": \"# Hello World\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/convert",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"convert"
+					]
+				},
+				"description": "Convert markdown to html"
 			},
 			"response": []
 		}
