@@ -24,8 +24,7 @@ const CardListView = props => {
     const [qContent, setQuestionContent] = useState(null);
     const [aContent, setAnswerContent] = useState(null);
     const [cardDetails, setCardDetails] = useState(null);        
-    const [tagList, setTagList] = useState(null);    
-    const [groupList, setGroupList] = useState(null);
+    const [tagList, setTagList] = useState(null);        
     const [questionList, setQuestionList] = useState(null);
     const [isQuestionDetails, toggleQuestionDetail] = useState(false);
     //snackBar
@@ -35,7 +34,19 @@ const CardListView = props => {
     
     // event handlers and methods
     const filterGroupList = (list, path) => {
-        return list;
+        let filteredList = [];
+        // console.log('Path and List are: ', path, list);
+        if (path !== 'all') {
+            filteredList = list.filter(item => {
+                return item.slug === path;
+            });
+        } else {
+            filteredList = list;
+        }
+        // console.log('filtered list is: ', filteredList);
+        if (filteredList.length > 0) enqueueSnackbar(`${filteredList.length} Question(s) Loaded...`, {variant: 'info'});
+        else enqueueSnackbar(`No Question(s) present in this group yet!`, {variant: 'info'});
+        return filteredList;
     };
 
     const handleBackButtonClick = (status) => {
@@ -103,7 +114,7 @@ const CardListView = props => {
             // console.log('Loaded tag list', res2.data);
             setTagList(res2.data);
             setLoading(false);
-            enqueueSnackbar(`${count} Questions Loaded...`, {variant: 'info'});
+            enqueueSnackbar(`${count} Question(s) Loaded...`, {variant: 'info'});
         }, err => {
             setLoading(false);
             console.log('Error loading tags', err);
@@ -119,11 +130,11 @@ const CardListView = props => {
     // componentDidUpdate
     useEffect(()=>{
         toggleQuestionDetail(false);
-        if (list && list.length > 0){
-            const filteredList = filterGroupList(list, window.location.hash);
-            setGroupList(filteredList);
-            const filteredQuestionList = filterQuestionList(filteredList);
-            setQuestionList(filteredQuestionList);
+        if (list && list.length > 0){            
+            const path = window.location.hash.substring(6, window.location.hash.length);            
+            const filteredQuestionList = filterQuestionList(list);
+            const filteredList = filterGroupList(filteredQuestionList, path);
+            setQuestionList(filteredList);
         }
     },[window.location.hash]);
 
