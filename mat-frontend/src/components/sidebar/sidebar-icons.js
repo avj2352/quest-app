@@ -6,16 +6,18 @@ import StarIcon from '@material-ui/icons/Stars';
 import PolymerIcon from '@material-ui/icons/Polymer';
 import AngularIcon from '@material-ui/icons/BrightnessAuto';
 import AlgoIcon from '@material-ui/icons/Subject';
-import DataIcon from '@material-ui/icons/Dashboard';
+import DataIcon from '@material-ui/icons/VerticalSplit';
 import EsIcon from '@material-ui/icons/Bookmarks';
 import PatternsIcon from '@material-ui/icons/VerticalSplit';
 import NodeIcon from '@material-ui/icons/Http';
 import QuestionIcon from '@material-ui/icons/QuestionAnswer';
 import GroupIcon from '@material-ui/icons/CardMembership';
 import TagIcon from '@material-ui/icons/SettingsEthernet';
-import AllIcon from '@material-ui/icons/Home';
+import AllIcon from '@material-ui/icons/AccountBalance';
 import SortingIcon from '@material-ui/icons/LibraryBooks';
 import FlutterIcon from '@material-ui/icons/MobileFriendly';
+import CSSIcon from '@material-ui/icons/ImportantDevices';
+import JSIcon from '@material-ui/icons/Build';
 
 
 
@@ -37,6 +39,8 @@ export const showIcon = (name) => {
             return <EsIcon/>;
         case 'react':
             return <PolymerIcon/>;
+        case 'vue':
+            return <PolymerIcon/>;
         case 'angular':
             return <AngularIcon/>;
         case 'algos':
@@ -47,6 +51,10 @@ export const showIcon = (name) => {
             return <SortingIcon/>;
         case 'flutter':
             return <FlutterIcon/>;
+        case 'css':
+            return <CSSIcon/>;
+        case 'js':
+            return <JSIcon/>;
         default:
             return <StarIcon/>;
     }

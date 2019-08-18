@@ -57,13 +57,11 @@ const useStyles = makeStyles(theme => ({
   badgeContainer: {
     // border: '1px solid red',
     width: '100%',
-    display: 'flex',
-    justifyContent: 'flex-start'
+    display: 'block',
+    textAlign: 'left'
   },
   qArea: {
-    // border: '1px solid red',    
-    marginLeft: '5px',
-    padding: '5px',
+    padding: 15,
     width: '100%',
     textAlign: 'left'    
   },  
