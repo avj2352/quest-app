@@ -1,9 +1,7 @@
 /**
  * Model for Tag server side schema
  */
-import mongoose from 'mongoose';
-
-const Schema = mongoose.Schema;
+import mongoose, { Schema } from 'mongoose';
 
 export const TagSchema = new Schema({
     name: {

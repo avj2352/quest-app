@@ -1,10 +1,7 @@
 /**
  * Model for Questionnaire server side schema
  */
-import mongoose from 'mongoose';
-import { QuestionnaireSchema } from './questionnaire.model';
-
-const Schema = mongoose.Schema;
+import mongoose, { Schema } from 'mongoose';
 
 export const UserSchema = new Schema({
     name: {
@@ -13,13 +10,21 @@ export const UserSchema = new Schema({
     },
     password: {
         type: String,
-        required: 'Enter Password'
+        required: 'Enter password',
+        select: false
+    },
+    provider: {
+        type: String,
+        required: 'Enter provier'
     },
     email: {
         type: String,
         required: 'Enter Email ID'
-    },        
-    questions: [QuestionnaireSchema]
+    },            
+    role: {
+        type: String,
+        required: 'Is User a premium or free tier user'
+    }
 });
 
 export const UserModel = mongoose.model('users', UserSchema);

@@ -1,9 +1,7 @@
 /**
  * Model for Group server side schema
  */
-import mongoose from 'mongoose';
-
-const Schema = mongoose.Schema;
+import mongoose, { Schema } from 'mongoose';
 
 export const GroupSchema = new Schema({
     title: {
@@ -18,10 +16,11 @@ export const GroupSchema = new Schema({
         type: String,
         required: 'Provide group description'
     },
-    isPublic: {
+    // premium true is only made available for subscribed users
+    premium: {
         type: Boolean,
         required: 'Public or Private collection'
-    },
+    }
 });
 
 export const GroupModel = mongoose.model('groups', GroupSchema);
