@@ -83,10 +83,7 @@ const Login = ()=>{
             <img className={classes.imgLogo} src={logo} alt="app-logo"/>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
-        </Avatar>        
-        <Typography component="h1" variant="h5">
-          Login
-        </Typography>
+        </Avatar>
         {loading && <div className={classes.progress}>                        
             <LinearProgress color="secondary" />
         </div>}

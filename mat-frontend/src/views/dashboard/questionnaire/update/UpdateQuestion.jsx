@@ -57,7 +57,7 @@ const UpdateQuestion = props => {
         .then(res => {
             setLoading(false);
             enqueueSnackbar(`Article updated !`, {variant: 'info'});
-            window.location.href = '#/app/admin?g=questions';
+            window.location.href = '#/app';
         }, err => {
             setLoading(false);
             console.log('Error updating Article: ', err);

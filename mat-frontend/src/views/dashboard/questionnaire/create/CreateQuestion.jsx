@@ -54,7 +54,7 @@ const CreateQuestion = props => {
         .then(res => {
             setLoading(false);
             enqueueSnackbar(`New Article Added !`, {variant: 'info'});
-            window.location.href = '#/app/admin?g=questions';
+            window.location.href = '#/app';
         }, err => {
             setLoading(false);
             console.log('Error creating new Article: ', err);

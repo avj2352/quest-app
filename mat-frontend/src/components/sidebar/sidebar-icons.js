@@ -18,6 +18,7 @@ import SortingIcon from '@material-ui/icons/LibraryBooks';
 import FlutterIcon from '@material-ui/icons/MobileFriendly';
 import CSSIcon from '@material-ui/icons/ImportantDevices';
 import JSIcon from '@material-ui/icons/Build';
+import UXIcon from '@material-ui/icons/PanTool';
 
 
 
@@ -55,6 +56,10 @@ export const showIcon = (name) => {
             return <CSSIcon/>;
         case 'js':
             return <JSIcon/>;
+        case 'nest':
+            return <NodeIcon/>;
+        case 'ux':
+            return <UXIcon/>;
         default:
             return <StarIcon/>;
     }
