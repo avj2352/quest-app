@@ -43,7 +43,7 @@ const CardListView = props => {
         } else {
             filteredList = list;
         }
-        // console.log('filtered list is: ', filteredList);
+        // console.log('filtered list by group: ', filteredList);
         if (filteredList.length > 0) enqueueSnackbar(`${filteredList.length} Question(s) Loaded...`, {variant: 'info'});
         else enqueueSnackbar(`No Question(s) present in this group yet!`, {variant: 'info'});
         return filteredList;
@@ -55,7 +55,7 @@ const CardListView = props => {
 
     const handleCardClick = (data) => {
         setLoading(true);
-        console.log('Card was clicked: ', data);
+        // console.log('Card was clicked: ', data);
         // render both q&a as html using Promise.all
         const renderQuestionPromise = postMarkdownRender(data.qContent);
         const renderAnswerPromise = postMarkdownRender(data.aContent);        
@@ -132,9 +132,9 @@ const CardListView = props => {
         toggleQuestionDetail(false);
         if (list && list.length > 0){            
             const path = window.location.hash.substring(6, window.location.hash.length);            
-            const filteredQuestionList = filterQuestionList(list);
-            const filteredList = filterGroupList(filteredQuestionList, path);
-            setQuestionList(filteredList);
+            const filteredList = filterGroupList(list, path);
+            const filteredQuestionList = filterQuestionList(filteredList);
+            setQuestionList(filteredQuestionList);
         }
     },[window.location.hash]);
 

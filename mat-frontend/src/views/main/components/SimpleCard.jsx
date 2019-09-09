@@ -71,9 +71,7 @@ const styles = theme => ({
 const SimpleCard = props => {
     // state
     const [tagList, setTagList] = useState(null);
-
     const { classes } = props;
-    const { enqueueSnackbar, closeSnackbar} = useSnackbar();
 
     // event handlers
     const handleClick = () => {
@@ -88,9 +86,9 @@ const SimpleCard = props => {
       });
     };
 
-    const renderTagComponents = (list) => {
-      let result = [];
+    const renderTagComponents = (list) => {      
       // console.log('Selected tags:', list);
+      let result = [];
       if (list && list.length > 0) {
         list.map (item => {
           const temp = props.tagList.filter(val => {
@@ -117,6 +115,10 @@ const SimpleCard = props => {
     useEffect(()=>{
       renderTagComponents(props.selectedTags);
     },[]);
+
+    useEffect(()=>{
+      renderTagComponents(props.selectedTags);
+    },[props.selectedTags]);
 
     // renders
     return (
