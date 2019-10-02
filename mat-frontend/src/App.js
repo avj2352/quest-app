@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import deepPurple from '@material-ui/core/colors/deepPurple';
 import purple from '@material-ui/core/colors/purple';
 import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { AppContext } from './common/AppContext';
