@@ -18,7 +18,7 @@ import { styles } from './card-view-style';
 
 const CardListView = props => {
     
-    
+    const [actualCount, setActualCount] = useState(0);
     const [isLoading, setLoading] = useState(false);
     const [list, setMainList] = useState(null);    
     const [qContent, setQuestionContent] = useState(null);
@@ -36,16 +36,17 @@ const CardListView = props => {
     const filterGroupList = (list, path) => {
         let filteredList = [];
         // console.log('Path and List are: ', path, list);
-        if (path !== 'all') {
+        if (path !== 'all') {            
             filteredList = list.filter(item => {
                 return item.slug === path;
             });
+        if (filteredList[0].questionCount !== 0) enqueueSnackbar(`${filteredList[0].questionCount} Question(s) Loaded...`, {variant: 'info'});
+        else enqueueSnackbar(`No Question(s) present in this group yet!`, {variant: 'info'});
         } else {
             filteredList = list;
+            enqueueSnackbar(`${actualCount} Question(s) Loaded...`, {variant: 'info'});
         }
-        // console.log('filtered list by group: ', filteredList);
-        if (filteredList.length > 0) enqueueSnackbar(`${filteredList.length} Question(s) Loaded...`, {variant: 'info'});
-        else enqueueSnackbar(`No Question(s) present in this group yet!`, {variant: 'info'});
+        // console.log('filtered list by group: ', filteredList);        
         return filteredList;
     };
 
@@ -104,6 +105,7 @@ const CardListView = props => {
             setMainList(res.data);
             filteredQuestionList = filterQuestionList(res.data);
             count = filteredQuestionList.length;
+            setActualCount(count);
             setQuestionList(filteredQuestionList);
             return allTagPromise;            
         }, err => {

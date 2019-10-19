@@ -51,7 +51,7 @@ const AdminLayout = props => {
                 <Sidebar open={open} handleDrawerClose={handleDrawerClose}/>
                 <main className={classNames(classes.content, { [classes.contentShift]: open })}>
                     {getRoutes()}                
-            </main>
+                </main>
             </div>
         </SnackbarProvider>
     );

@@ -33,6 +33,8 @@ export const showIcon = (name) => {
             return <QuestionIcon/>;
         case 'node':
             return <NodeIcon/>;
+        case 'nest':
+            return <NodeIcon/>;
         case 'patterns':
             return <PatternsIcon/>;
         case 'es':
