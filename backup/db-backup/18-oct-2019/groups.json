@@ -1,0 +1,12 @@
+{"_id":{"$oid":"5d52068baa54c34180a4813c"},"title":"Algorithms","slug":"algos","description":"Questions related to Algorithms in Javascript","premium":true,"__v":0}
+{"_id":{"$oid":"5d5206aaaa54c34180a4813d"},"title":"Datastructures","slug":"ds","description":"Questions related to Datastructures in Javascript","premium":true,"__v":0}
+{"_id":{"$oid":"5d520740aa54c34180a4813e"},"title":"React","slug":"react","description":"Questions / Aritcles related to react","premium":false,"__v":0}
+{"_id":{"$oid":"5d52074caa54c34180a4813f"},"title":"Angular","slug":"angular","description":"Questions / Aritcles related to angular","premium":false,"__v":0}
+{"_id":{"$oid":"5d5257c4954dab0016611386"},"title":"Sorting","slug":"sorting","description":"Questions related to javascript sorting","premium":true,"__v":0}
+{"_id":{"$oid":"5d53df003ac67a00160671e3"},"title":"Node JS","slug":"node","description":"Articles related to Node server side programming","premium":false,"__v":0}
+{"_id":{"$oid":"5d54e6e53b82230016f596e4"},"title":"CSS Animations","slug":"css","description":"articles / questions related to css transitions","premium":false,"__v":0}
+{"_id":{"$oid":"5d5565f04d555b0016d3e304"},"title":"Javascript","slug":"js","description":"Questions / Aritcles related to javascript / ecmascript 6+","premium":false,"__v":0}
+{"_id":{"$oid":"5d5a403a1ddcc90016428fe7"},"title":"NestJS","slug":"nest","description":"Nest JS framework for building scalable server side Node JS applications","premium":false,"__v":0}
+{"_id":{"$oid":"5d5c317e79d75f001616d183"},"title":"Design Patterns","slug":"patterns","description":"Questions / Aritcles related to design patterns in Javascript / Node JS","premium":false,"__v":0}
+{"_id":{"$oid":"5d6408cf2775780016ecf971"},"title":"Design / Develop Tools","slug":"ux","description":"Design / Development Tools related articles, interview questions, ","premium":true,"__v":0}
+{"_id":{"$oid":"5d9831d715b66a00168212cc"},"title":"Finance - Insurance","slug":"finance","description":"All Questions about Insurance domain - Finance","premium":true,"__v":0}

@@ -1,0 +1,31 @@
+{"_id":{"$oid":"5d520577aa54c34180a48132"},"name":"javascript","description":"questions related to javascript","__v":0}
+{"_id":{"$oid":"5d520585aa54c34180a48133"},"name":"es6","description":"questions related to ecmascript 2015 / es6","__v":0}
+{"_id":{"$oid":"5d520597aa54c34180a48134"},"name":"google","description":"questions asked by Google","__v":0}
+{"_id":{"$oid":"5d5205a0aa54c34180a48135"},"name":"amazon","description":"questions asked by Amazon","__v":0}
+{"_id":{"$oid":"5d5205c1aa54c34180a48136"},"name":"educative.io","description":"articles related to educative.io website","__v":0}
+{"_id":{"$oid":"5d5205fbaa54c34180a48137"},"name":"pramp","description":"questions asked in pramp website","__v":0}
+{"_id":{"$oid":"5d52060caa54c34180a48138"},"name":"cake","description":"articles related to interviewcake.com website","__v":0}
+{"_id":{"$oid":"5d520639aa54c34180a48139"},"name":"react 16.x","description":"articles related to the  new version of react","__v":0}
+{"_id":{"$oid":"5d520653aa54c34180a4813a"},"name":"angular 8.x","description":"articles related to the  new version of angular","__v":0}
+{"_id":{"$oid":"5d52065caa54c34180a4813b"},"name":"vue 2.x","description":"articles related to the  new version of vue","__v":0}
+{"_id":{"$oid":"5d523745afe2f30016c41252"},"name":"material","description":"Material design related","__v":0}
+{"_id":{"$oid":"5d5591fd3e078b001669cfcb"},"name":"udemy","description":"questions / articles that were picked up from among Udemy website courses","__v":0}
+{"_id":{"$oid":"5d5691738806320016112ee2"},"name":"tailwind css","description":"CSS utility library for building responsive components tailwindcss.com","__v":0}
+{"_id":{"$oid":"5d58e6ef7a9bd30016231885"},"name":"traversy","description":"Traversy media channel on YouTube","__v":0}
+{"_id":{"$oid":"5d58e7147a9bd30016231886"},"name":"academind","description":"Academind taught course","__v":0}
+{"_id":{"$oid":"5d5a1b83267c3d0016ea9100"},"name":"pirple","description":"articles / questions from pirple.thinkific.com website","__v":0}
+{"_id":{"$oid":"5d5a43751ddcc90016428fe9"},"name":"node v8.x","description":"features supported as part of Node JS version 8 & above","__v":0}
+{"_id":{"$oid":"5d5a437e1ddcc90016428fea"},"name":"node v10.x","description":"features supported as part of Node JS version 10 & above","__v":0}
+{"_id":{"$oid":"5d5a439e1ddcc90016428feb"},"name":"mongodb","description":"article related to / includes Mongo DB","__v":0}
+{"_id":{"$oid":"5d5c323779d75f001616d184"},"name":"creational patterns","description":"Design Patterns which deal with the creation of an instance","__v":0}
+{"_id":{"$oid":"5d5c325179d75f001616d185"},"name":"structural patterns","description":"These Design Patterns have to do with the way objects are composed or put together","__v":0}
+{"_id":{"$oid":"5d5c328779d75f001616d186"},"name":"design patterns","description":"This article contains a design pattern","__v":0}
+{"_id":{"$oid":"5d5c329a79d75f001616d187"},"name":"behavioral patterns","description":"These design patterns define how objects interact with one another","__v":0}
+{"_id":{"$oid":"5d622529b602da0016df8f67"},"name":"ng8.x","description":"angular major version 8.x and above","__v":0}
+{"_id":{"$oid":"5d6408f22775780016ecf972"},"name":"adobe xd","description":"Adobe XD software related articles / questions","__v":0}
+{"_id":{"$oid":"5d65340d2b098f0016f4ba6d"},"name":"tympanus","description":"Articles from https://tympanus.net","__v":0}
+{"_id":{"$oid":"5d6bdb962a77330016c74e2f"},"name":"typescript","description":"Typescript (v3.0 and above)","__v":0}
+{"_id":{"$oid":"5d8ede5c9ccd7e0016cdb48f"},"name":"@nestjs/cli v6.8.1","description":"features supported as part of Nest JS CLI version 6.8.1 and above","__v":0}
+{"_id":{"$oid":"5d98320f15b66a00168212cd"},"name":"2019","description":"Questions asked in the year 2019","__v":0}
+{"_id":{"$oid":"5d98324215b66a00168212ce"},"name":"lynda","description":"Questions / Articles from Lynda website","__v":0}
+{"_id":{"$oid":"5d98326915b66a00168212cf"},"name":"topdanmark","description":"Articles to prepare for Topdanmark interview","__v":0}
