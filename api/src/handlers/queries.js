@@ -80,4 +80,14 @@ export class QueriesController {
             res.send(err);
         });
     }
+
+    /**
+     * Function to handle search requests from the client
+     * @param {*} req 
+     * @param {*} res 
+     */
+    handleSearch(req, res) {
+        console.log('Query String is: ', req.body.query);
+        res.json({success: 'API hit successful'});
+    }
 }

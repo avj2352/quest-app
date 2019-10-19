@@ -1,1 +1,22 @@
 .App {  text-align: center; }
+a {
+    color: rgb(11, 172, 200);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(15, 134, 155);
+    text-decoration: underline;
+}
+
+code {
+    color: rgb(11, 172, 200);
+    font-size: 20px !important;
+    font-weight: bold;
+}
+
+pre code {
+    color: none;
+    font-size: 15px !important;
+    font-weight: normal;
+}

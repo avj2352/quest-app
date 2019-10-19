@@ -93,6 +93,10 @@ const routes = (app) => {
     // convert json to markdown
     app.route('/convert')
     .post(convertMarkdown);
+
+    // Search Filter
+    app.route('/search')
+    .post(queries.handleSearch);
 };
 
 

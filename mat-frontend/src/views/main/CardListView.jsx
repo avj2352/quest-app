@@ -18,7 +18,7 @@ import { styles } from './card-view-style';
 
 const CardListView = props => {
     
-    
+    const [actualCount, setActualCount] = useState(0);
     const [isLoading, setLoading] = useState(false);
     const [list, setMainList] = useState(null);    
     const [qContent, setQuestionContent] = useState(null);
@@ -36,16 +36,17 @@ const CardListView = props => {
     const filterGroupList = (list, path) => {
         let filteredList = [];
         // console.log('Path and List are: ', path, list);
-        if (path !== 'all') {
+        if (path !== 'all') {            
             filteredList = list.filter(item => {
                 return item.slug === path;
             });
+        if (filteredList[0].questionCount !== 0) enqueueSnackbar(`${filteredList[0].questionCount} Question(s) Loaded...`, {variant: 'info'});
+        else enqueueSnackbar(`No Question(s) present in this group yet!`, {variant: 'info'});
         } else {
             filteredList = list;
+            enqueueSnackbar(`${actualCount} Question(s) Loaded...`, {variant: 'info'});
         }
-        // console.log('filtered list is: ', filteredList);
-        if (filteredList.length > 0) enqueueSnackbar(`${filteredList.length} Question(s) Loaded...`, {variant: 'info'});
-        else enqueueSnackbar(`No Question(s) present in this group yet!`, {variant: 'info'});
+        // console.log('filtered list by group: ', filteredList);        
         return filteredList;
     };
 
@@ -55,7 +56,7 @@ const CardListView = props => {
 
     const handleCardClick = (data) => {
         setLoading(true);
-        console.log('Card was clicked: ', data);
+        // console.log('Card was clicked: ', data);
         // render both q&a as html using Promise.all
         const renderQuestionPromise = postMarkdownRender(data.qContent);
         const renderAnswerPromise = postMarkdownRender(data.aContent);        
@@ -104,6 +105,7 @@ const CardListView = props => {
             setMainList(res.data);
             filteredQuestionList = filterQuestionList(res.data);
             count = filteredQuestionList.length;
+            setActualCount(count);
             setQuestionList(filteredQuestionList);
             return allTagPromise;            
         }, err => {
@@ -132,9 +134,9 @@ const CardListView = props => {
         toggleQuestionDetail(false);
         if (list && list.length > 0){            
             const path = window.location.hash.substring(6, window.location.hash.length);            
-            const filteredQuestionList = filterQuestionList(list);
-            const filteredList = filterGroupList(filteredQuestionList, path);
-            setQuestionList(filteredList);
+            const filteredList = filterGroupList(list, path);
+            const filteredQuestionList = filterQuestionList(filteredList);
+            setQuestionList(filteredQuestionList);
         }
     },[window.location.hash]);
 

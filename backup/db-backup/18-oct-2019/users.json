@@ -1,0 +1,5 @@
+{"_id":{"$oid":"5d520557aa54c34180a48131"},"name":"Pramod","provider":"app","password":"$2b$10$RfUUQACp7NPL1eZkP40Cn.DaQI/uA7UrwZ6B5dbuPRLIVZTL0pxiu","email":"pramod.jingade@gmail.com","role":"admin","__v":0}
+{"_id":{"$oid":"5d520b24aa54c34180a48141"},"name":"Pramod AJ","provider":"app","password":"$2b$10$7UKmkU/7aREoYnLWEfqRC.B.QQykq/F3VjQHC.bjDgzaH6njq42PO","email":"avj2352@gmail.com","role":"premium","__v":0}
+{"_id":{"$oid":"5d52447a954dab0016611384"},"name":"Raktima Saxena","provider":"app","password":"$2b$10$u.5f5SLq88.rHMe3nK0h9OyVzYvQShEJ1MKY3L77Z1JniAwX9IQWa","email":"raktima.saxena@gmail.com","role":"premium","__v":0}
+{"_id":{"$oid":"5d52574f954dab0016611385"},"name":"Pooja Premnath","provider":"app","password":"$2b$10$53G9W9ktfo/mduUbNuxTPOCU0aVq/okSSGtnu.TfDrF0SuUA7RtJW","email":"pooj.hp@gmail.com","role":"premium","__v":0}
+{"_id":{"$oid":"5d52614d954dab0016611387"},"name":"Ananth Shayana","provider":"app","password":"$2b$10$kXUG.2q8bSNnPVVzwkBYP.4SZRcM8M3l16cukP.kbrRowGNeeS9HO","email":"divine3d@gmail.com","role":"admin","__v":0}
